@@ -1,6 +1,6 @@
 # WHEN-TO-WAKE ABI
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21761954.svg)](https://doi.org/10.5281/zenodo.21761954)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21761953.svg)](https://doi.org/10.5281/zenodo.21761953)
 
 Reproducible code, frozen protocol, statistical analysis plan, aggregate outputs, and novelty-audit trail for:
 
@@ -8,7 +8,7 @@ Reproducible code, frozen protocol, statistical analysis plan, aggregate outputs
 
 ## Status
 
-The analyses and aggregate outputs are frozen for the initial public software release. Version 1.0.0 is archived in Zenodo at [doi:10.5281/zenodo.21761954](https://doi.org/10.5281/zenodo.21761954). The accompanying manuscript has not yet been accepted or published; the manuscript DOI will be added when available.
+The analyses and aggregate outputs are frozen. Version 1.0.1 is a presentation-only patch that corrects graphical-abstract spacing; it does not change any cohort, estimate, diagnostic, protocol, or statistical-analysis-plan content. The Zenodo concept record for all software versions is [doi:10.5281/zenodo.21761953](https://doi.org/10.5281/zenodo.21761953). Version 1.0.0 remains archived at [doi:10.5281/zenodo.21761954](https://doi.org/10.5281/zenodo.21761954). The accompanying manuscript has not yet been accepted or published; the manuscript DOI will be added when available.
 
 ## Main analysis
 
@@ -76,7 +76,7 @@ The public repository contains the dated queries, counts, screening decisions, a
 
 ## Citation
 
-Use `CITATION.cff` and cite the immutable Zenodo version record: [doi:10.5281/zenodo.21761954](https://doi.org/10.5281/zenodo.21761954). The concept DOI for all software versions is [doi:10.5281/zenodo.21761953](https://doi.org/10.5281/zenodo.21761953). The manuscript DOI will be added when available.
+Use `CITATION.cff`. Until a version-specific DOI is inserted after the v1.0.1 archive is minted, use the Zenodo concept DOI [doi:10.5281/zenodo.21761953](https://doi.org/10.5281/zenodo.21761953), which resolves to the latest software version. The manuscript DOI will be added when available.
 
 ## License
 
