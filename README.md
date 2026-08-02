@@ -1,12 +1,14 @@
 # WHEN-TO-WAKE ABI
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21761954.svg)](https://doi.org/10.5281/zenodo.21761954)
+
 Reproducible code, frozen protocol, statistical analysis plan, aggregate outputs, and novelty-audit trail for:
 
 > Early Sedation De-escalation After Physiologic Stabilization and Day-7 Ventilator Liberation in Acute Brain Injury: A Two-Cohort Sequential Target-Trial Emulation
 
 ## Status
 
-The analyses and aggregate outputs are frozen for the initial public software release. The accompanying manuscript has not yet been accepted or published; the manuscript DOI will be added when available.
+The analyses and aggregate outputs are frozen for the initial public software release. Version 1.0.0 is archived in Zenodo at [doi:10.5281/zenodo.21761954](https://doi.org/10.5281/zenodo.21761954). The accompanying manuscript has not yet been accepted or published; the manuscript DOI will be added when available.
 
 ## Main analysis
 
@@ -74,7 +76,7 @@ The public repository contains the dated queries, counts, screening decisions, a
 
 ## Citation
 
-Use `CITATION.cff`. The manuscript DOI and immutable repository release identifier will be added when available.
+Use `CITATION.cff` and cite the immutable Zenodo version record: [doi:10.5281/zenodo.21761954](https://doi.org/10.5281/zenodo.21761954). The concept DOI for all software versions is [doi:10.5281/zenodo.21761953](https://doi.org/10.5281/zenodo.21761953). The manuscript DOI will be added when available.
 
 ## License
 
