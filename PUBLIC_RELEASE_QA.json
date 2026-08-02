@@ -1,17 +1,20 @@
 {
-  "generated_at_utc": "2026-08-02T16:18:13.451593+00:00",
+  "generated_at_utc": "2026-08-02T16:35:14.399743+00:00",
   "status": "PASS",
-  "manifest_file_count_excluding_manifest_and_qa": 59,
-  "manifest_total_bytes": 447095,
+  "release_version": "1.0.0",
+  "manifest_file_count_excluding_manifest_and_qa": 60,
+  "manifest_total_bytes": 447491,
+  "forbidden_content_hits": [],
+  "restricted_filename_hits": [],
+  "python_syntax_errors": [],
+  "missing_required_files": [],
+  "license_status": "APPROVED_MIT",
+  "terminal_aware_unit_test": "PASS",
+  "patient_level_data_included": false,
   "bulk_search_snapshots_omitted": [
     "novelty_audit/clinicaltrials_inventory_2026-08-02.csv",
     "novelty_audit/europepmc_inventory_2026-08-02.csv",
     "novelty_audit/novelty_priority_screen_2026-08-02.csv",
     "novelty_audit/novelty_pubmed_inventory_2026-08-02.csv"
-  ],
-  "forbidden_content_hits": [],
-  "restricted_filename_hits": [],
-  "python_syntax_errors": [],
-  "license_status": "AUTHOR_DECISION_REQUIRED",
-  "patient_level_data_included": false
+  ]
 }

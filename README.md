@@ -6,7 +6,7 @@ Reproducible code, frozen protocol, statistical analysis plan, aggregate outputs
 
 ## Status
 
-This repository is a pre-submission public-release candidate. The analyses and aggregate outputs are frozen; the manuscript has not yet been accepted or published. A permanent release identifier will be added before journal submission.
+The analyses and aggregate outputs are frozen for the initial public software release. The accompanying manuscript has not yet been accepted or published; the manuscript DOI will be added when available.
 
 ## Main analysis
 
@@ -78,7 +78,7 @@ Use `CITATION.cff`. The manuscript DOI and immutable repository release identifi
 
 ## License
 
-No reuse license is granted by this release candidate until the authors approve and add a license. See `LICENSE_SELECTION_REQUIRED.md`. The data providers' terms remain controlling for MIMIC-IV and eICU-CRD regardless of the code license.
+Original analysis code and documentation are released under the [MIT License](LICENSE). The data providers' terms remain controlling for MIMIC-IV and eICU-CRD and are not altered by this code license.
 
 ## Contact
 
