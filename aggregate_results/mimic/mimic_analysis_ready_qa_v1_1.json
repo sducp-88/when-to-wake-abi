@@ -1,0 +1,12 @@
+{
+  "study_id": "WHEN-TO-WAKE-ABI",
+  "run_at_utc": "2026-08-02T14:24:11.951858+00:00",
+  "grid_rows": 9830,
+  "interval_rows": 39320,
+  "unique_stays": 2027,
+  "integrity_failures": 0,
+  "status": "PASS",
+  "grid_sha256": "056E0A225BDBE85F538B3176A510DBFB6BDC12283F0A4B8D7EBD688CCE236E01",
+  "interval_sha256": "EB5581BAD45A53C64E337DD2CCE39B122444F444465767BF0C6EC2897B5E51C9",
+  "patient_level_rows_exported": false
+}

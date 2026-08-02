@@ -1,0 +1,38 @@
+{
+  "database": "ClinicalTrials.gov API v2",
+  "retrieved_at_utc": "2026-08-02T13:18:09.820018+00:00",
+  "queries": [
+    {
+      "query_name": "abi_sedation",
+      "query": "\"acute brain injury\" AND (sedation OR sedative)",
+      "reported_count": 16,
+      "retrieved_records": 16
+    },
+    {
+      "query_name": "tbi_sedation",
+      "query": "\"traumatic brain injury\" AND (sedation OR sedative OR \"wake-up test\")",
+      "reported_count": 108,
+      "retrieved_records": 108
+    },
+    {
+      "query_name": "neurocritical_sedation",
+      "query": "(neurocritical OR \"neurological intensive care\") AND (sedation OR sedative)",
+      "reported_count": 22,
+      "retrieved_records": 22
+    },
+    {
+      "query_name": "sedation_interruption_mv",
+      "query": "\"sedation interruption\" AND \"mechanical ventilation\"",
+      "reported_count": 9,
+      "retrieved_records": 9
+    },
+    {
+      "query_name": "sedation_deescalation_mv",
+      "query": "(\"sedation de-escalation\" OR \"sedative reduction\" OR \"sedation weaning\") AND \"mechanical ventilation\"",
+      "reported_count": 3,
+      "retrieved_records": 3
+    }
+  ],
+  "unique_studies": 143,
+  "boundary": "Targeted layered registry search; absence means not detected in this search, not never registered."
+}

@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the accompanying manuscript and the archived software release."
+title: "WHEN-TO-WAKE ABI: code and protocol for Early Sedation De-escalation After Physiologic Stabilization and Day-7 Ventilator Liberation in Acute Brain Injury: A Two-Cohort Sequential Target-Trial Emulation"
+type: software
+version: 0.1.0-rc1
+authors:
+  - given-names: Zhichao
+    family-names: Bi
+  - given-names: Lifei
+    family-names: Wei
+  - given-names: Jiao
+    family-names: Li
+  - given-names: Ge
+    family-names: Wang
+  - given-names: Min
+    family-names: Wang
+  - given-names: Wenyan
+    family-names: Zhang
+  - given-names: Chao
+    family-names: Lai
+  - given-names: Peng
+    family-names: Cheng
+    orcid: "https://orcid.org/0000-0003-1368-490X"
+keywords:
+  - acute brain injury
+  - mechanical ventilation
+  - sedation
+  - target trial emulation
+  - MIMIC-IV
+  - eICU-CRD
+license: other

@@ -1,0 +1,23 @@
+# Credentialed source data and patient-level derivatives
+00_restricted_data/
+
+# Reconstructed formal outputs (public frozen aggregates live in aggregate_results/)
+05_results/
+06_manuscript/references/
+
+# Environments, caches, and editor files
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+.DS_Store
+Thumbs.db
+
+# Credentials and local overrides
+.env
+.env.*
+*.pem
+*.key
+secrets.*

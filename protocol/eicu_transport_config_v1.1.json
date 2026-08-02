@@ -1,0 +1,27 @@
+{
+  "study_id": "WHEN-TO-WAKE-ABI",
+  "database": "eICU-CRD-2.0",
+  "analysis_role": "measurement_aware_transport",
+  "parent_plan": "EICU_TRANSPORT_ANALYSIS_PLAN_v1.0.md",
+  "weight_amendment": "EICU_TRANSPORT_AMENDMENT_v1.1_WEIGHT_CALIBRATION.md",
+  "formal_run_label": "transport_v1_1_calibrated",
+  "denominator_models": "separate_by_strategy_and_interval",
+  "logistic_regularization_c": 10.0,
+  "probability_clip": [0.005, 0.995],
+  "weight_truncation_percentiles_within_strategy": [1, 99],
+  "post_truncation_calibration": {
+    "method": "iterative_proportional_fitting",
+    "cycles": 30,
+    "margins": [
+      "baseline_core_sedative_class_count",
+      "baseline_icp_category",
+      "baseline_fio2_category"
+    ]
+  },
+  "bootstrap_unit": "patientunitstayid",
+  "bootstrap_replicates": 1000,
+  "bootstrap_jobs": 2,
+  "random_seed": 20260802,
+  "explicit_extubation_claim_permitted": false,
+  "point_gaps_are_drug_stops": false
+}

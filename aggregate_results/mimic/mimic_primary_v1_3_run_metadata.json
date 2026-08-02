@@ -1,0 +1,25 @@
+{
+  "study_id": "WHEN-TO-WAKE-ABI",
+  "analysis_version": "1.3",
+  "run_label": "primary_v1_3",
+  "run_at_utc": "2026-08-02T14:35:47.052928+00:00",
+  "bootstrap_requested": 1000,
+  "bootstrap_jobs": 4,
+  "bootstrap_converged": 1000,
+  "grid_rows": 9830,
+  "interval_rows": 39320,
+  "retained_clone_rows": 5657,
+  "retained_clone_stays": 1827,
+  "terminal_strategy_rule": "adherence assessment stops at first extubation, death, tracheostomy, or ICU discharge",
+  "grace_period_rule": "both clones remain compatible until a temporally valid early action or the first strategy-terminal event",
+  "weight_truncation": "within strategy 1st/99th percentile",
+  "probability_clipping": [
+    0.005,
+    0.995
+  ],
+  "censoring_models": "separate logistic models by assigned strategy and six-hour interval",
+  "stabilizing_numerator": "marginal adherence probability within strategy and interval",
+  "logistic_regularization_c": 10.0,
+  "patient_level_output": ".\\00_restricted_data\\derived\\mimic_v1_1\\RESTRICTED_mimic_primary_v1_3_retained_clone_weights.csv.gz",
+  "safe_effect_output": ".\\05_results\\formal_analysis\\mimic\\mimic_primary_v1_3_effect.csv"
+}

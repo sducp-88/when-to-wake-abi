@@ -1,0 +1,74 @@
+domain,canonical_variable,role,time_varying,required_primary,required_transport,unit_or_encoding,window_or_derivation,notes
+provenance,database_id,provenance,no,yes,yes,string,source metadata,Database and version
+provenance,source_table,provenance,yes,yes,yes,string,record-level mapping,Retain only in restricted derivatives
+identity,patient_id,linkage,no,yes,yes,string,source identifier,Never export raw IDs
+identity,icu_stay_id,linkage,no,yes,yes,string,source identifier,Never export raw IDs
+identity,hospital_id,cluster,no,no,yes,string,eICU patient table,Transport/site sensitivity
+baseline,age,confounder,no,yes,yes,years,ICU admission,Top-code handled per source documentation
+baseline,sex,confounder,no,yes,yes,categorical,patient table,Harmonize source values
+baseline,admission_year,confounder,no,yes,yes,integer,ICU admission,Model secular changes
+baseline,admission_type,confounder,no,yes,yes,categorical,admission table,Emergency elective urgent other
+baseline,icu_type,confounder,no,yes,yes,categorical,ICU table,Harmonized broad category
+baseline,weight_kg,normalization/confounder,yes,yes,yes,kg,closest pre-time-zero within 24 h,Do not infer from drug concentration
+baseline,abi_subtype,effect modifier,no,yes,yes,TBI|ICH|SAH|AIS,diagnosis/procedure mapping,Mutually exclusive hierarchy prespecified
+baseline,comorbidity_burden,confounder,no,yes,yes,score/vector,preexisting diagnoses,CCI plus selected components
+baseline,illness_severity,confounder,no,yes,yes,database native/harmonized,first ICU day,MIMIC components and eICU APACHE modeled separately
+baseline,treatment_limitation,confounder/sensitivity,yes,preferred,preferred,binary/categorical,known before time zero,DNR/comfort/withdrawal only where reliable
+time,ventilation_start_time,time origin,yes,yes,yes,timestamp/offset,validated first invasive episode,Anchor grids to ventilation not ICU admission
+time,grid_time,time zero,yes,yes,yes,timestamp/offset,every 6 h from 12 to 96 h,One patient may contribute multiple trials
+time,hours_since_vent_start,confounder,yes,yes,yes,hours,grid minus ventilation start,Spline
+neurologic,gcs_total,confounder/eligibility,yes,yes,yes,3-15,latest/worst prior 6 h,Prefer component-derived total if valid
+neurologic,gcs_motor,confounder,yes,yes,preferred,1-6,latest/worst prior 6 h,Intubation less influential than verbal
+neurologic,rass,confounder,yes,yes,preferred,-5 to +4,latest prior 6 h,Do not equate low RASS with pharmacologic sedation alone
+neurologic,pupil_reactivity,confounder,yes,preferred,optional,categorical,latest prior 6 h,Source mapping dependent
+neurologic,icp_mmHg,eligibility/confounder,yes,preferred,optional,mmHg,latest and burden prior 2 h,Absence of monitoring is not normal ICP
+neurologic,cpp_mmHg,confounder,yes,preferred,optional,mmHg,time-aligned MAP minus ICP,Only if alignment valid
+neurologic,time_since_neuro_measure,observation process,yes,yes,yes,hours,grid minus latest GCS/RASS,Required with carry-forward
+exposure,propofol_rate,treatment,yes,yes,yes,database-native numeric,active/last prior 2 h and interval trajectory,Within-drug relative changes only
+exposure,midazolam_rate,treatment,yes,yes,yes,database-native numeric,active/last prior 2 h and interval trajectory,Within-drug relative changes only
+exposure,dexmedetomidine_rate,treatment,yes,yes,yes,database-native numeric,active/last prior 2 h and interval trajectory,Within-drug relative changes only
+exposure,core_sedative_pattern,treatment/confounder,yes,yes,yes,categorical,active vector at time zero,Propofol midazolam dexmedetomidine combination
+exposure,core_sedative_cumulative_6h,confounder,yes,yes,yes,drug-specific native area,prior 6 h,Do not sum unlike units
+exposure,qualifying_reduction,treatment,yes,yes,yes,binary,at least 30 percent decrease or stop in grace,No other active increase and no new core start
+exposure,complete_pause_2h,treatment subtype,yes,yes,no,binary,continuous absence at least 2 h,MIMIC sensitivity only
+exposure,ketamine_rate,rescue/confounder,yes,preferred,optional,database native,prior/current interval,Sparse and heterogeneous
+exposure,opioid_rate,confounder,yes,yes,yes,drug-specific native,prior/current interval,Separate fentanyl morphine remifentanil
+exposure,barbiturate_coma,exclusion/rescue,yes,yes,preferred,binary,active or recent 6 h,Do not treat routine single induction dose as coma
+exposure,nmba_exposure,eligibility/confounder,yes,yes,yes,binary,active/administered prior 2 h,Source-specific duration rules
+exposure,hyperosmolar_rescue,eligibility/confounder,yes,yes,preferred,binary,mannitol/hypertonic bolus prior 6 h,Maintenance use distinguished where possible
+exposure,antiseizure_rescue,confounder,yes,preferred,optional,binary/vector,prior 6 h,Identify refractory-status treatment
+exposure,antipsychotic_use,confounder,yes,preferred,optional,binary/vector,prior 6 h,Agitation management proxy
+physiology,map_median_2h,eligibility/confounder,yes,yes,yes,mmHg,median prior 2 h,Must be at least 65
+physiology,map_min_2h,eligibility/confounder,yes,yes,yes,mmHg,minimum prior 2 h,Must be at least 60
+physiology,heart_rate,confounder,yes,yes,yes,bpm,latest/mean prior 2 h,Spline
+physiology,vasopressor_observed,confounder,yes,yes,yes,binary,prior 2 h,Absence in eICU not assumed no vasopressor
+physiology,norepinephrine_equivalent,confounder/strict eligibility,yes,preferred,optional,ug/kg/min,prior 2 h,Only when dose/unit mapping valid
+physiology,temperature_C,confounder,yes,yes,preferred,Celsius,latest prior 6 h,Route harmonization
+physiology,lactate_mmol_L,confounder,yes,yes,preferred,mmol/L,latest prior 24 h,Carry-forward limit 24 h
+physiology,creatinine_mg_dL,confounder,yes,yes,yes,mg/dL,latest prior 24 h,Drug clearance proxy
+physiology,bilirubin_mg_dL,confounder,yes,preferred,optional,mg/dL,latest prior 24 h,Drug clearance proxy
+ventilation,invasive_ventilation,eligibility/outcome,yes,yes,yes,binary,validated episode overlap,Never infer solely from one device row
+ventilation,fio2,eligibility/confounder,yes,yes,yes,fraction,latest prior 6 h,Percent values converted after validation
+ventilation,peep_cmH2O,eligibility/confounder,yes,yes,yes,cmH2O,latest prior 6 h,Must be no greater than 10
+ventilation,ventilator_mode,confounder,yes,preferred,preferred,categorical,latest prior 6 h,Controlled assisted spontaneous other
+ventilation,pao2_fio2,confounder,yes,preferred,preferred,ratio,nearest aligned values prior 24 h,Alignment logged
+ventilation,paco2_mmHg,confounder,yes,preferred,preferred,mmHg,latest arterial prior 24 h,Exclude venous samples
+ventilation,sbt_evidence,eligibility/confounder/sensitivity,yes,preferred,optional,binary/categorical,prior 6 h and before time zero,Successful SBT distinguished if possible
+ventilation,extubation_time,outcome event,yes,yes,yes,timestamp/offset,validated event,Check against ventilation cessation
+ventilation,reintubation_time,outcome event,yes,yes,conditional,timestamp/offset,validated new episode within 48 h,eICU conditional gate
+ventilation,tracheostomy_time,outcome event,yes,yes,preferred,timestamp/offset,procedure/treatment mapping,Before extubation counts as primary failure
+outcome,alive_successfully_extubated_day7,primary,no,yes,conditional,binary,alive plus no renewed ventilation within 48 h,Observe through day 9 when needed
+outcome,alive_off_ventilation_day7,transport fallback,no,no,yes,binary,alive and off invasive ventilation at day 7,Non-equivalent if reintubation sequence unvalidated
+outcome,successful_extubation_day14,secondary,no,yes,conditional,binary,same definition through day 14,Observe additional 48 h
+outcome,ventilator_free_days_day28,secondary,no,yes,preferred,0-28,death assigned zero,Episode validation required
+outcome,reintubation_48h,secondary selected,no,yes,conditional,binary,among extubated,Interpret selected population
+outcome,tracheostomy_day14,secondary,no,yes,preferred,binary,time-to-event,Death competing
+outcome,icu_mortality,secondary,no,yes,yes,binary,ICU stay,Database-specific
+outcome,hospital_mortality,secondary,no,yes,yes,binary,admission/patient table,Database-specific follow-up
+outcome,icu_length_of_stay,secondary,no,yes,yes,hours,ICU out minus in,Competing events acknowledged
+outcome,hospital_length_of_stay,secondary,no,yes,yes,hours,discharge minus admit,Competing events acknowledged
+analysis,assigned_strategy,clone assignment,yes,yes,yes,0|1,two clones per eligible grid,Not observed treatment label
+analysis,adherent_interval,artificial censoring,yes,yes,yes,binary,each 6 h through 24 h,Censor at first incompatible interval
+analysis,stabilized_weight,analysis,yes,yes,yes,positive numeric,cumulative product,Truncate per SAP and preserve raw version
+analysis,cluster_patient,variance,no,yes,yes,string,patient identifier,All grids/clones retained within bootstrap cluster
+analysis,cluster_hospital,variance,no,no,yes,string,hospital identifier,eICU sensitivity bootstrap

@@ -1,0 +1,8 @@
+step,n_rows_or_grids,n_stays
+adult_first_icu_abi,3301,3301
+candidate_ventilation_grids,25432,2772
+stable_eligible_grids,9830,2027
+early_temporally_valid,2225,1430
+continued_at_6h,6951,1617
+contemporaneous_weaning,332,318
+unclassifiable,322,263

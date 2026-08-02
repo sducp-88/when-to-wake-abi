@@ -1,0 +1,20 @@
+{
+  "study_id": "WHEN-TO-WAKE-ABI",
+  "database": "eICU-CRD-2.0",
+  "analysis_role": "measurement-aware transport",
+  "analysis_version": "1.0",
+  "run_at_utc": "2026-08-02T15:07:51.433230+00:00",
+  "bootstrap_requested": 1000,
+  "bootstrap_converged": 1000,
+  "grid_rows": 2964,
+  "interval_rows": 11856,
+  "retained_clone_rows": 951,
+  "retained_clone_stays": 369,
+  "outcome": "alive reconstructed ventilation end by day 7 without renewed ventilation within 48 hours",
+  "explicit_extubation_claim_permitted": false,
+  "point_gaps_interpreted_as_drug_stops": false,
+  "logistic_regularization_c": 10.0,
+  "post_weight_calibration": "iterative raking to baseline drug-count and ICP-bin margins",
+  "patient_level_output": ".\\00_restricted_data\\derived\\eicu_transport_v1_0\\RESTRICTED_eicu_transport_v1_1_calibrated_retained_clone_weights.csv.gz",
+  "safe_effect_output": ".\\05_results\\formal_analysis\\eicu\\eicu_transport_v1_1_calibrated_effect.csv"
+}

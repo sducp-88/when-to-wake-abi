@@ -1,0 +1,59 @@
+{
+  "study_id": "WHEN-TO-WAKE-ABI",
+  "analysis_version": "1.3",
+  "run_at_utc": "2026-08-02T15:04:26.227544+00:00",
+  "primary_reference_ci_source": "mimic_primary_v1_3_effect.csv",
+  "sensitivity_bootstrap_replicates": 200,
+  "bootstrap_unit": "ICU stay",
+  "bootstrap_manifest": [
+    {
+      "scenario": "lead_30_min",
+      "path": ".\\05_results\\formal_analysis\\mimic\\sensitivity\\mimic_lead_30_min_bootstrap_200.csv",
+      "requested": 200,
+      "converged": 200
+    },
+    {
+      "scenario": "lead_120_min",
+      "path": ".\\05_results\\formal_analysis\\mimic\\sensitivity\\mimic_lead_120_min_bootstrap_200.csv",
+      "requested": 200,
+      "converged": 200
+    },
+    {
+      "scenario": "first_eligible_grid_only",
+      "path": ".\\05_results\\formal_analysis\\mimic\\sensitivity\\mimic_first_eligible_grid_only_bootstrap_200.csv",
+      "requested": 200,
+      "converged": 200
+    },
+    {
+      "scenario": "ventilation_end_proxy",
+      "path": ".\\05_results\\formal_analysis\\mimic\\sensitivity\\mimic_ventilation_end_proxy_bootstrap_200.csv",
+      "requested": 200,
+      "converged": 200
+    },
+    {
+      "scenario": "subtype_AIS",
+      "path": ".\\05_results\\formal_analysis\\mimic\\sensitivity\\mimic_subtype_AIS_bootstrap_200.csv",
+      "requested": 200,
+      "converged": 200
+    },
+    {
+      "scenario": "subtype_ICH",
+      "path": ".\\05_results\\formal_analysis\\mimic\\sensitivity\\mimic_subtype_ICH_bootstrap_200.csv",
+      "requested": 200,
+      "converged": 200
+    },
+    {
+      "scenario": "subtype_SAH",
+      "path": ".\\05_results\\formal_analysis\\mimic\\sensitivity\\mimic_subtype_SAH_bootstrap_200.csv",
+      "requested": 200,
+      "converged": 200
+    },
+    {
+      "scenario": "subtype_TBI",
+      "path": ".\\05_results\\formal_analysis\\mimic\\sensitivity\\mimic_subtype_TBI_bootstrap_200.csv",
+      "requested": 200,
+      "converged": 200
+    }
+  ],
+  "safe_aggregate_outputs_only": true
+}

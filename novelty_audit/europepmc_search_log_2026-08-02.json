@@ -1,0 +1,32 @@
+{
+  "database": "Europe PMC REST API",
+  "retrieved_at_utc": "2026-08-02T13:25:58.211065+00:00",
+  "queries": [
+    {
+      "query_name": "direct_dynamic_abi",
+      "query": "(\"acute brain injury\" OR neurocritical) AND (\"sedation interruption\" OR \"sedation de-escalation\" OR \"sedation weaning\" OR \"sedative reduction\")",
+      "reported_count": 123,
+      "retrieved_records": 123
+    },
+    {
+      "query_name": "target_trial_abi_sedation",
+      "query": "(\"acute brain injury\" OR neurocritical OR \"traumatic brain injury\" OR stroke) AND (sedation OR sedative) AND (\"target trial\" OR \"time-varying confounding\" OR \"marginal structural model\")",
+      "reported_count": 128,
+      "retrieved_records": 128
+    },
+    {
+      "query_name": "public_icu_abi_sedation",
+      "query": "(MIMIC OR eICU) AND (sedation OR sedative) AND (brain OR neurologic OR stroke)",
+      "reported_count": 7188,
+      "retrieved_records": 7188
+    },
+    {
+      "query_name": "trajectory_sedation",
+      "query": "(\"deep-to-light sedation\" OR \"sedation trajectory\") AND (ventilation OR ICU OR \"intensive care\")",
+      "reported_count": 59,
+      "retrieved_records": 59
+    }
+  ],
+  "unique_records": 7412,
+  "boundary": "Layered supplementary search including preprints; absence means not detected in this search, not never published."
+}

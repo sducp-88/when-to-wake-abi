@@ -1,0 +1,47 @@
+{
+  "database": "PubMed",
+  "retrieved_at_utc": "2026-08-02T13:15:17.725343+00:00",
+  "eutils_base": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils",
+  "queries": [
+    {
+      "query_name": "direct_repeat",
+      "query": "((neurocritical[Title/Abstract] OR acute brain injury[Title/Abstract] OR traumatic brain injury[Title/Abstract] OR intracerebral hemorrhage[Title/Abstract] OR subarachnoid hemorrhage[Title/Abstract] OR acute ischemic stroke[Title/Abstract]) AND (sedation interruption[Title/Abstract] OR sedation de-escalation[Title/Abstract] OR sedative reduction[Title/Abstract] OR sedation weaning[Title/Abstract]) AND (mechanical ventilation[Title/Abstract] OR intensive care[Title/Abstract]))",
+      "reported_count": 7,
+      "retrieved_pmids": 7
+    },
+    {
+      "query_name": "awakening_trial_abi",
+      "query": "((neurocritical[Title/Abstract] OR brain injury[Title/Abstract] OR traumatic brain injury[Title/Abstract] OR stroke[Title/Abstract] OR subarachnoid hemorrhage[Title/Abstract] OR intracerebral hemorrhage[Title/Abstract]) AND (daily sedation interruption[Title/Abstract] OR spontaneous awakening trial[Title/Abstract] OR wake-up test[Title/Abstract] OR neurological wake-up test[Title/Abstract]))",
+      "reported_count": 15,
+      "retrieved_pmids": 15
+    },
+    {
+      "query_name": "mimic_eicu_sedation",
+      "query": "((MIMIC[Title/Abstract] OR eICU[Title/Abstract]) AND (sedation[Title/Abstract] OR sedative[Title/Abstract] OR propofol[Title/Abstract] OR dexmedetomidine[Title/Abstract] OR midazolam[Title/Abstract]) AND (mechanical ventilation[Title/Abstract] OR extubation[Title/Abstract] OR intensive care[Title/Abstract]))",
+      "reported_count": 99,
+      "retrieved_pmids": 99
+    },
+    {
+      "query_name": "target_trial_sedation",
+      "query": "((target trial[Title/Abstract] OR target trial emulation[Title/Abstract]) AND (sedation[Title/Abstract] OR sedative[Title/Abstract] OR mechanical ventilation[Title/Abstract] OR extubation[Title/Abstract] OR spontaneous awakening[Title/Abstract]))",
+      "reported_count": 45,
+      "retrieved_pmids": 45
+    },
+    {
+      "query_name": "time_varying_sedation",
+      "query": "((marginal structural model[Title/Abstract] OR time-varying confounding[Title/Abstract] OR dynamic treatment regime[Title/Abstract] OR cloning censoring weighting[Title/Abstract]) AND (sedation[Title/Abstract] OR sedative[Title/Abstract]) AND (critical care[Title/Abstract] OR intensive care[Title/Abstract]))",
+      "reported_count": 2,
+      "retrieved_pmids": 2
+    },
+    {
+      "query_name": "abi_sedative_exposure",
+      "query": "((acute brain injury[Title/Abstract] OR traumatic brain injury[Title/Abstract] OR subarachnoid hemorrhage[Title/Abstract] OR intracerebral hemorrhage[Title/Abstract] OR acute ischemic stroke[Title/Abstract]) AND (sedation depth[Title/Abstract] OR sedative exposure[Title/Abstract] OR propofol[Title/Abstract] OR dexmedetomidine[Title/Abstract] OR midazolam[Title/Abstract]) AND (outcome[Title/Abstract] OR extubation[Title/Abstract] OR mechanical ventilation[Title/Abstract]))",
+      "reported_count": 155,
+      "retrieved_pmids": 155
+    }
+  ],
+  "unique_pmids": 316,
+  "records_parsed": 316,
+  "retmax_per_query": 1000,
+  "boundary": "Targeted layered search; absence means not detected in this search, not never published."
+}
