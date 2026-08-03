@@ -1,9 +1,9 @@
 {
-  "generated_at_utc": "2026-08-02T18:23:55.177596+00:00",
+  "generated_at_utc": "2026-08-03T03:28:35.743121+00:00",
   "status": "PASS",
-  "release_version": "1.0.1",
-  "manifest_file_count_excluding_manifest_and_qa": 64,
-  "manifest_total_bytes": 485719,
+  "release_version": "1.0.2",
+  "manifest_file_count_excluding_manifest_and_qa": 65,
+  "manifest_total_bytes": 489974,
   "forbidden_content_hits": [],
   "restricted_filename_hits": [],
   "python_syntax_errors": [],

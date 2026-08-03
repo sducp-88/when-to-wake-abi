@@ -2,13 +2,13 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21761953.svg)](https://doi.org/10.5281/zenodo.21761953)
 
-Reproducible code, frozen protocol, statistical analysis plan, aggregate outputs, and novelty-audit trail for:
+Reproducible code, prespecified protocol, statistical analysis plan, aggregate outputs, and novelty-audit trail for:
 
 > Early Sedation De-escalation After Physiologic Stabilization and Day-7 Ventilator Liberation in Acute Brain Injury: A Two-Cohort Sequential Target-Trial Emulation
 
 ## Status
 
-The analyses and aggregate outputs are frozen. Version 1.0.1 is a presentation-only patch that corrects graphical-abstract spacing; it does not change any cohort, estimate, diagnostic, protocol, or statistical-analysis-plan content. Version 1.0.1 is archived at [doi:10.5281/zenodo.21762440](https://doi.org/10.5281/zenodo.21762440), and the Zenodo concept record for all software versions is [doi:10.5281/zenodo.21761953](https://doi.org/10.5281/zenodo.21761953). Version 1.0.0 remains archived at [doi:10.5281/zenodo.21761954](https://doi.org/10.5281/zenodo.21761954). The accompanying manuscript has not yet been accepted or published; the manuscript DOI will be added when available.
+The analyses and aggregate outputs are unchanged. Version 1.0.2 is a presentation-only patch that harmonizes the journal figures, graphical abstract, legends, and export settings; it does not change any cohort, estimate, diagnostic, protocol, or statistical-analysis-plan content. The Zenodo concept record for all software versions is [doi:10.5281/zenodo.21761953](https://doi.org/10.5281/zenodo.21761953). Version 1.0.1 is archived at [doi:10.5281/zenodo.21762440](https://doi.org/10.5281/zenodo.21762440), and version 1.0.0 at [doi:10.5281/zenodo.21761954](https://doi.org/10.5281/zenodo.21761954). The accompanying manuscript has not yet been accepted or published; the manuscript DOI will be added when available.
 
 ## Main analysis
 
@@ -21,7 +21,7 @@ The eICU analysis uses a non-equivalent ventilation-end proxy and is a measureme
 
 ## Data-access boundary
 
-MIMIC-IV and the eICU Collaborative Research Database are credentialed PhysioNet resources. Source records and all patient-level derivatives are **not included** and must not be redistributed. Authorized users must obtain each database under its own credentialing and data-use requirements. No patient-level data are needed to inspect the frozen protocol or reproduce the reported tables from the included aggregate outputs.
+MIMIC-IV and the eICU Collaborative Research Database are credentialed PhysioNet resources. Source records and all patient-level derivatives are **not included** and must not be redistributed. Authorized users must obtain each database under its own credentialing and data-use requirements. No patient-level data are needed to inspect the protocol or reproduce the reported effect and diagnostic tables and figures from the included aggregate outputs; reconstruction of the descriptive cohort table requires authorized local analysis grids.
 
 For full reconstruction from source data, place authorized local copies under this ignored structure:
 
@@ -38,8 +38,8 @@ Never commit `00_restricted_data/` or patient-level derived files.
 
 ```text
 code/                 cohort construction, QA, estimation, sensitivity, and figure scripts
-protocol/             frozen protocol/SAP, amendments, manifests, DAG, and common data model
-aggregate_results/    disclosure-reviewed aggregate estimates and bootstrap distributions
+protocol/             protocol/SAP, amendments, manifests, DAG, and common data model
+aggregate_results/    aggregate estimates, diagnostics, and bootstrap distributions
 novelty_audit/        dated search logs, screening ledger, and bounded novelty report
 ```
 
@@ -68,7 +68,7 @@ python code/qa_eicu_analysis_ready_v1_0.py
 python code/run_eicu_transport_ccw_v1_0.py --bootstrap 1000 --n-jobs 1 --calibrate
 ```
 
-Run the frozen pipeline only with authorized local data. The exact development-to-formal-analysis history is documented in `protocol/CHANGELOG.md` and the versioned freeze manifests.
+Run the versioned pipeline only with authorized local data. The specification history is documented in `protocol/CHANGELOG.md` and the versioned analysis manifests.
 
 ## Novelty-audit boundary
 
@@ -76,7 +76,7 @@ The public repository contains the dated queries, counts, screening decisions, a
 
 ## Citation
 
-Use `CITATION.cff` and cite the immutable v1.0.1 record [doi:10.5281/zenodo.21762440](https://doi.org/10.5281/zenodo.21762440). The concept DOI [doi:10.5281/zenodo.21761953](https://doi.org/10.5281/zenodo.21761953) resolves to the latest software version. The manuscript DOI will be added when available.
+Use `CITATION.cff`. The concept DOI [doi:10.5281/zenodo.21761953](https://doi.org/10.5281/zenodo.21761953) resolves to the latest software version; the immutable v1.0.2 DOI will be recorded after Zenodo mints it. The manuscript DOI will be added when available.
 
 ## License
 

@@ -1,41 +1,53 @@
 from __future__ import annotations
 
-import os
 import json
 import math
+import os
 from pathlib import Path
 
+import matplotlib
+
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from PIL import Image
 
 
 ROOT = Path(os.environ.get("WTW_PROJECT_ROOT", Path.cwd())).resolve()
 MIMIC_GRID = ROOT / "00_restricted_data" / "derived" / "mimic_v1_1" / "mimic_analysis_grid_v1_1.csv.gz"
 EICU_GRID = ROOT / "00_restricted_data" / "derived" / "eicu_transport_v1_0" / "eicu_analysis_grid_transport_v1_0.csv.gz"
-MIMIC_EFFECT = ROOT / "05_results" / "formal_analysis" / "mimic" / "mimic_primary_v1_3_effect.csv"
-EICU_EFFECT = ROOT / "05_results" / "formal_analysis" / "eicu" / "eicu_transport_v1_1_calibrated_effect.csv"
-MIMIC_SENS = ROOT / "05_results" / "formal_analysis" / "mimic" / "sensitivity" / "mimic_sensitivity_summary_v1_3.csv"
-MIMIC_BALANCE = ROOT / "05_results" / "formal_analysis" / "mimic" / "mimic_primary_v1_3_balance_diagnostics.csv"
-EICU_BALANCE = ROOT / "05_results" / "formal_analysis" / "eicu" / "eicu_transport_v1_1_calibrated_balance_diagnostics.csv"
-MIMIC_WEIGHTS = ROOT / "05_results" / "formal_analysis" / "mimic" / "mimic_primary_v1_3_weight_diagnostics.csv"
-EICU_WEIGHTS = ROOT / "05_results" / "formal_analysis" / "eicu" / "eicu_transport_v1_1_calibrated_weight_diagnostics.csv"
-MIMIC_FUNNEL = ROOT / "05_results" / "formal_analysis" / "mimic" / "mimic_formal_funnel_2026-08-02.csv"
-EICU_FUNNEL = ROOT / "05_results" / "formal_analysis" / "eicu" / "eicu_transport_funnel_2026-08-02.csv"
+MIMIC_RESULTS = ROOT / "aggregate_results" / "mimic"
+EICU_RESULTS = ROOT / "aggregate_results" / "eicu"
+MIMIC_EFFECT = MIMIC_RESULTS / "mimic_primary_v1_3_effect.csv"
+EICU_EFFECT = EICU_RESULTS / "eicu_transport_v1_1_calibrated_effect.csv"
+MIMIC_SENS = MIMIC_RESULTS / "sensitivity" / "mimic_sensitivity_summary_v1_3.csv"
+MIMIC_BALANCE = MIMIC_RESULTS / "mimic_primary_v1_3_balance_diagnostics.csv"
+EICU_BALANCE = EICU_RESULTS / "eicu_transport_v1_1_calibrated_balance_diagnostics.csv"
+MIMIC_WEIGHTS = MIMIC_RESULTS / "mimic_primary_v1_3_weight_diagnostics.csv"
+EICU_WEIGHTS = EICU_RESULTS / "eicu_transport_v1_1_calibrated_weight_diagnostics.csv"
+MIMIC_FUNNEL = MIMIC_RESULTS / "mimic_formal_funnel_2026-08-02.csv"
+EICU_FUNNEL = EICU_RESULTS / "eicu_transport_funnel_2026-08-02.csv"
 
-OUT_TABLES = ROOT / "05_results" / "publication_tables"
-OUT_FIGURES = ROOT / "05_results" / "publication_figures"
-OUT_SUMMARY = ROOT / "05_results" / "publication_summary"
+GENERATED = ROOT / "generated_publication_assets"
+OUT_TABLES = Path(os.environ.get("WTW_TABLE_OUTPUT", str(GENERATED / "tables")))
+OUT_FIGURES = Path(os.environ.get("WTW_FIGURE_OUTPUT", str(GENERATED / "figures")))
+OUT_SUMMARY = Path(os.environ.get("WTW_SUMMARY_OUTPUT", str(GENERATED / "summary")))
 
 
 COLORS = {
-    "navy": "#17324D",
-    "blue": "#2C6EAA",
-    "teal": "#3A8D8F",
-    "gold": "#D8A03D",
-    "red": "#B44C4C",
-    "gray": "#6B7280",
-    "light": "#EEF3F7",
+    "ink": "#26343D",
+    "navy": "#3E5568",
+    "blue": "#496F82",
+    "teal": "#5E817A",
+    "ochre": "#9A7B50",
+    "aubergine": "#756D7D",
+    "rust": "#8C5E58",
+    "gray": "#687782",
+    "grid": "#D8DEE1",
+    "light": "#F3F5F6",
+    "blue_light": "#EDF2F4",
+    "teal_light": "#EEF3F1",
 }
 
 
@@ -199,6 +211,10 @@ def save_figure(fig: plt.Figure, stem: str, width_in: float, height_in: float) -
         facecolor="white",
         pil_kwargs={"compression": "tiff_lzw"},
     )
+    tiff_path = OUT_FIGURES / f"{stem}.tiff"
+    with Image.open(tiff_path) as image:
+        rgb = image.convert("RGB")
+        rgb.save(tiff_path, compression="tiff_lzw", dpi=(600, 600))
     fig.savefig(OUT_FIGURES / f"{stem}.pdf", bbox_inches="tight", facecolor="white")
     fig.savefig(OUT_FIGURES / f"{stem}.svg", bbox_inches="tight", facecolor="white")
     plt.close(fig)
@@ -213,7 +229,6 @@ def flow_figure() -> None:
     ax.axis("off")
     ax.set_xlim(0, 1)
     ax.set_ylim(0, 1)
-    ax.text(0.5, 0.96, "WHEN-TO-WAKE ABI cohort construction", ha="center", va="top", fontsize=16, fontweight="bold", color=COLORS["navy"])
     columns = [
         (0.24, "MIMIC-IV v3.1", [
             ("Adults with acute brain injury", m_map["adult_first_icu_abi"]),
@@ -230,16 +245,31 @@ def flow_figure() -> None:
             ("Continued sedation\ncompatible at 6 h", e_map["continued_at_6h_grids"]),
         ], COLORS["teal"]),
     ]
-    ys = [0.82, 0.67, 0.52, 0.34, 0.18]
+    ys = [0.82, 0.66, 0.50, 0.32, 0.14]
     for x, title, items, color in columns:
-        ax.text(x, 0.89, title, ha="center", fontsize=13, fontweight="bold", color=color)
+        ax.text(x, 0.94, title, ha="center", fontsize=12.5, fontweight="bold", color=COLORS["ink"])
+        ax.plot([x - 0.12, x + 0.12], [0.91, 0.91], color=color, lw=2.2, solid_capstyle="round")
         for idx, ((label, n), y) in enumerate(zip(items, ys)):
-            ax.text(x, y, f"{label}\n{int(n):,}", ha="center", va="center", fontsize=8.4,
-                    bbox=dict(boxstyle="round,pad=0.45", fc="white", ec=color, lw=1.7))
+            fill = COLORS["blue_light"] if color == COLORS["blue"] else COLORS["teal_light"]
+            ax.text(
+                x,
+                y,
+                f"{label}\n{int(n):,}",
+                ha="center",
+                va="center",
+                fontsize=8.5,
+                color=COLORS["ink"],
+                linespacing=1.12,
+                bbox=dict(boxstyle="round,pad=0.42,rounding_size=0.06", fc=fill, ec=color, lw=1.15),
+            )
             if idx < len(items)-1:
-                ax.annotate("", xy=(x, ys[idx+1]+0.06), xytext=(x, y-0.06), arrowprops=dict(arrowstyle="->", lw=1.4, color=COLORS["gray"]))
-    ax.text(0.5, 0.04, "Databases were analyzed independently; patient-level records were not pooled.", ha="center", fontsize=9.5, color=COLORS["gray"])
-    save_figure(fig, "Figure_1_cohort_flow", 8.5, 7.4)
+                ax.annotate(
+                    "",
+                    xy=(x, ys[idx+1] + 0.065),
+                    xytext=(x, y - 0.065),
+                    arrowprops=dict(arrowstyle="-|>", mutation_scale=9, lw=1.0, color=COLORS["gray"]),
+                )
+    save_figure(fig, "Figure_1_cohort_flow", 7.4, 6.5)
 
 
 def forest_figure(effects: pd.DataFrame, sens: pd.DataFrame) -> None:
@@ -251,34 +281,58 @@ def forest_figure(effects: pd.DataFrame, sens: pd.DataFrame) -> None:
         r = sens.loc[sens["scenario"].eq(key)].iloc[0]
         rows.append((r["Analysis"], r["risk_difference"], r["risk_difference_ci_lower"], r["risk_difference_ci_upper"], "Sensitivity"))
     frame = pd.DataFrame(rows, columns=["label", "estimate", "low", "high", "type"])
+    for column in ["estimate", "low", "high"]:
+        frame[column] = 100 * pd.to_numeric(frame[column], errors="coerce")
     y = np.arange(len(frame))[::-1]
-    fig, ax = plt.subplots()
-    ax.axvline(0, color="#111827", lw=1, ls="--")
+    fig = plt.figure(constrained_layout=True)
+    grid = fig.add_gridspec(1, 2, width_ratios=[3.4, 1.45], wspace=0.04)
+    ax = fig.add_subplot(grid[0, 0])
+    annotation_ax = fig.add_subplot(grid[0, 1], sharey=ax)
+    ax.axvline(0, color=COLORS["ink"], lw=0.9, ls=(0, (4, 3)))
     for i, row in frame.iterrows():
         color = COLORS["blue"] if row["type"] == "Primary" else COLORS["teal"] if row["type"] == "Transport" else COLORS["gray"]
-        ax.errorbar(row["estimate"], y[i], xerr=[[row["estimate"]-row["low"]], [row["high"]-row["estimate"]]], fmt="o", color=color, ecolor=color, capsize=3, markersize=6)
-    ax.set_yticks(y)
-    ax.set_yticklabels(frame["label"], fontsize=9.5)
-    ax.set_xlabel("Risk difference for day-7 liberation (early de-escalation minus continued sedation)")
-    ax.set_title("Primary, transport, and sensitivity estimates", color=COLORS["navy"], fontweight="bold")
-    ax.grid(axis="x", alpha=0.2)
-    xmin = min(-0.03, float(frame["low"].min())-0.02)
-    # Reserve a dedicated right-hand annotation column so the longest
-    # confidence interval (the SAH subgroup) cannot run underneath its label.
-    xmax = max(0.45, float(frame["high"].max())+0.17)
-    ax.set_xlim(xmin, xmax)
-    for i, row in frame.iterrows():
-        ax.text(
-            xmax - 0.003,
+        marker = "s" if row["type"] == "Primary" else "D" if row["type"] == "Transport" else "o"
+        size = 6.8 if row["type"] != "Sensitivity" else 5.2
+        ax.errorbar(
+            row["estimate"],
             y[i],
-            f"{100*row['estimate']:.1f} ({100*row['low']:.1f} to {100*row['high']:.1f}) pp",
-            ha="right",
-            va="center",
-            fontsize=8.3,
-            bbox=dict(facecolor="white", edgecolor="none", pad=0.3),
+            xerr=[[row["estimate"]-row["low"]], [row["high"]-row["estimate"]]],
+            fmt=marker,
+            color=color,
+            ecolor=color,
+            capsize=2.5,
+            elinewidth=1.35,
+            capthick=1.1,
+            markersize=size,
         )
-    fig.tight_layout()
-    save_figure(fig, "Figure_2_effect_forest", 8.2, 5.8)
+    ax.set_yticks(y)
+    ax.set_yticklabels(frame["label"], fontsize=8.7, color=COLORS["ink"])
+    ax.set_xlabel("Risk difference for day-7 liberation, percentage points", color=COLORS["ink"])
+    ax.grid(axis="x", color=COLORS["grid"], lw=0.7)
+    ax.set_axisbelow(True)
+    ax.axhline(y[1] - 0.55, color=COLORS["grid"], lw=0.8)
+    xmin = min(-5.0, float(frame["low"].min()) - 1.5)
+    xmax = max(30.0, float(frame["high"].max()) + 1.5)
+    ax.set_xlim(xmin, xmax)
+    annotation_ax.set_xlim(0, 1)
+    annotation_ax.text(0.02, y.max() + 0.72, "Risk difference (95% CI)", ha="left", va="bottom", fontsize=8.2, color=COLORS["gray"], fontweight="bold")
+    for i, row in frame.iterrows():
+        annotation_ax.text(
+            0.02,
+            y[i],
+            f"{row['estimate']:.1f} ({row['low']:.1f} to {row['high']:.1f})",
+            ha="left",
+            va="center",
+            fontsize=8.0,
+            color=COLORS["ink"],
+        )
+    for side in ["top", "right", "left"]:
+        ax.spines[side].set_visible(False)
+    ax.spines["bottom"].set_color(COLORS["gray"])
+    ax.tick_params(axis="y", length=0)
+    ax.tick_params(axis="x", colors=COLORS["gray"])
+    annotation_ax.axis("off")
+    save_figure(fig, "Figure_2_effect_forest", 8.2, 5.55)
 
 
 def balance_figure() -> None:
@@ -294,19 +348,27 @@ def balance_figure() -> None:
         frame = frame.assign(before=pd.to_numeric(frame[before_col], errors="coerce").abs(), after=pd.to_numeric(frame[after_col], errors="coerce").abs()).sort_values("after", ascending=False).head(18).sort_values("after")
         frame["display_label"] = frame.apply(lambda r: str(r[variable_col]).replace("_", " ") if str(r.get("level", "")) == "continuous" else f"{str(r[variable_col]).replace('_', ' ')}: {r.get('level', '')}", axis=1)
         yy = np.arange(len(frame))
-        ax.scatter(frame["before"], yy, s=26, facecolors="none", edgecolors=COLORS["gray"], label="Before weighting")
-        ax.scatter(frame["after"], yy, s=28, color=color, label="After weighting")
-        ax.axvline(0.10, color=COLORS["red"], ls="--", lw=1)
+        ax.hlines(yy, xmin=np.minimum(frame["before"], frame["after"]), xmax=np.maximum(frame["before"], frame["after"]), color=COLORS["grid"], lw=0.75, zorder=1)
+        ax.scatter(frame["before"], yy, s=25, facecolors="white", edgecolors=COLORS["gray"], linewidths=1.0, label="Before weighting", zorder=2)
+        ax.scatter(frame["after"], yy, s=27, color=color, edgecolors="white", linewidths=0.35, label="After weighting", zorder=3)
+        ax.axvline(0.10, color=COLORS["ochre"], ls=(0, (3, 3)), lw=1.0)
         ax.set_yticks(yy)
-        ax.set_yticklabels(frame["display_label"], fontsize=7.1)
-        ax.set_title(database, fontweight="bold", color=color)
-        ax.grid(axis="x", alpha=0.15)
+        ax.set_yticklabels(frame["display_label"], fontsize=7.0, color=COLORS["ink"])
+        ax.set_title(database, fontweight="bold", color=COLORS["ink"], fontsize=11.5, pad=8)
+        ax.grid(axis="x", color=COLORS["grid"], lw=0.65)
+        ax.set_axisbelow(True)
+        for side in ["top", "right", "left"]:
+            ax.spines[side].set_visible(False)
+        ax.spines["bottom"].set_color(COLORS["gray"])
+        ax.tick_params(axis="y", length=0)
+        ax.tick_params(axis="x", colors=COLORS["gray"])
     axes[0].set_xlabel("Absolute standardized mean difference")
     axes[1].set_xlabel("Absolute standardized mean difference")
-    axes[0].legend(loc="lower right", fontsize=8, frameon=False)
-    fig.suptitle("Covariate balance before and after weighting", fontsize=14, fontweight="bold", color=COLORS["navy"])
-    fig.tight_layout(rect=(0, 0, 1, 0.95))
-    save_figure(fig, "Figure_3_covariate_balance", 10.5, 6.8)
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc="upper center", ncol=2, frameon=False, fontsize=8.2, bbox_to_anchor=(0.5, 0.995))
+    fig.text(0.5, 0.955, "Dotted line: absolute standardized mean difference = 0.10", ha="center", va="top", fontsize=7.8, color=COLORS["gray"])
+    fig.tight_layout(rect=(0, 0, 1, 0.91), w_pad=4.0)
+    save_figure(fig, "Figure_3_covariate_balance", 10.2, 6.35)
 
 
 def graphical_abstract(effects: pd.DataFrame) -> None:
@@ -316,20 +378,28 @@ def graphical_abstract(effects: pd.DataFrame) -> None:
     ax.axis("off")
     ax.set_xlim(0, 1)
     ax.set_ylim(0, 1)
-    ax.add_patch(plt.Rectangle((0, 0), 1, 1, facecolor="white", edgecolor=COLORS["navy"], lw=1.5))
-    ax.text(0.03, 0.88, "WHEN-TO-WAKE ABI", fontsize=16, fontweight="bold", color=COLORS["navy"])
-    ax.text(0.03, 0.66, "Adults with acute\nbrain injury", fontsize=11.5, fontweight="bold", color="#111827", va="top")
-    ax.text(0.03, 0.40, "Mechanical ventilation\nRepeated stable decisions", fontsize=8.7, color=COLORS["gray"], va="top")
-    ax.annotate("", xy=(0.285, 0.52), xytext=(0.24, 0.52), arrowprops=dict(arrowstyle="->", color=COLORS["gray"], lw=2))
-    ax.text(0.44, 0.80, "Strategy contrast", ha="center", fontsize=11, fontweight="bold", color=COLORS["navy"])
-    ax.text(0.345, 0.54, "Early de-escalation\nwithin 6 h", ha="center", va="center", fontsize=8.2, bbox=dict(boxstyle="round,pad=0.30", fc="#E8F2FA", ec=COLORS["blue"]))
-    ax.text(0.545, 0.54, "Continue sedation\nfor 24 h", ha="center", va="center", fontsize=8.2, bbox=dict(boxstyle="round,pad=0.30", fc="#F3F4F6", ec=COLORS["gray"]))
-    ax.annotate("", xy=(0.67, 0.52), xytext=(0.615, 0.52), arrowprops=dict(arrowstyle="->", color=COLORS["gray"], lw=2))
-    ax.text(0.82, 0.84, "Day-7 liberation", ha="center", fontsize=11.5, fontweight="bold", color=COLORS["navy"])
-    ax.text(0.76, 0.54, f"MIMIC-IV\nRD +{100*m['Risk difference']:.1f} pp\n({100*m['RD lower 95% CI']:.1f} to {100*m['RD upper 95% CI']:.1f})", ha="center", va="center", fontsize=9.2, color=COLORS["blue"])
-    ax.text(0.91, 0.54, f"eICU transport\nRD {100*e['Risk difference']:+.1f} pp\n({100*e['RD lower 95% CI']:.1f} to {100*e['RD upper 95% CI']:.1f})", ha="center", va="center", fontsize=9.2, color=COLORS["teal"])
-    ax.text(0.03, 0.12, "Sequential target-trial emulation with clone-censor-weight estimation", fontsize=8.5, color=COLORS["gray"])
-    ax.text(0.03, 0.04, "Observational associations; eICU used a non-equivalent ventilation-end proxy.", fontsize=8.0, color=COLORS["gray"])
+    panel_specs = [
+        (0.025, 0.17, 0.265, 0.67, COLORS["light"]),
+        (0.325, 0.17, 0.32, 0.67, "white"),
+        (0.68, 0.17, 0.295, 0.67, COLORS["light"]),
+    ]
+    for x, y, w, h, fill in panel_specs:
+        ax.add_patch(plt.Rectangle((x, y), w, h, facecolor=fill, edgecolor=COLORS["grid"], lw=0.8))
+    ax.text(0.025, 0.93, "WHEN-TO-WAKE ABI", fontsize=14.5, fontweight="bold", color=COLORS["ink"], va="top")
+    ax.text(0.045, 0.76, "Population", fontsize=8.4, fontweight="bold", color=COLORS["gray"])
+    ax.text(0.045, 0.62, "Adults with acute\nbrain injury", fontsize=11.0, fontweight="bold", color=COLORS["ink"], va="top")
+    ax.text(0.045, 0.33, "Mechanical ventilation\nRepeated stable decisions", fontsize=8.2, color=COLORS["gray"], va="top")
+    ax.text(0.345, 0.76, "Sequential strategy contrast", fontsize=8.4, fontweight="bold", color=COLORS["gray"])
+    ax.text(0.485, 0.59, "Early de-escalation within 6 h", ha="center", va="center", fontsize=8.2, color=COLORS["ink"], bbox=dict(boxstyle="round,pad=0.28,rounding_size=0.05", fc=COLORS["blue_light"], ec=COLORS["blue"], lw=1.0))
+    ax.text(0.485, 0.47, "versus", ha="center", va="center", fontsize=7.2, color=COLORS["gray"])
+    ax.text(0.485, 0.36, "Continued sedation for 24 h", ha="center", va="center", fontsize=8.2, color=COLORS["ink"], bbox=dict(boxstyle="round,pad=0.28,rounding_size=0.05", fc="white", ec=COLORS["gray"], lw=1.0))
+    ax.text(0.485, 0.225, "Clone-censor-weight estimation", ha="center", fontsize=7.7, color=COLORS["gray"])
+    ax.text(0.70, 0.76, "Day-7 liberation", fontsize=8.4, fontweight="bold", color=COLORS["gray"])
+    ax.text(0.72, 0.60, f"MIMIC-IV   {100*m['Risk difference']:+.1f} pp", fontsize=11.0, fontweight="bold", color=COLORS["blue"])
+    ax.text(0.72, 0.49, f"95% CI {100*m['RD lower 95% CI']:.1f} to {100*m['RD upper 95% CI']:.1f}", fontsize=8.2, color=COLORS["ink"])
+    ax.text(0.72, 0.34, f"eICU proxy   {100*e['Risk difference']:+.1f} pp", fontsize=10.2, fontweight="bold", color=COLORS["teal"])
+    ax.text(0.72, 0.24, f"95% CI {100*e['RD lower 95% CI']:.1f} to {100*e['RD upper 95% CI']:.1f}", fontsize=8.2, color=COLORS["ink"])
+    ax.text(0.025, 0.075, "Observational associations; eICU used a non-equivalent ventilation-end proxy.", fontsize=7.6, color=COLORS["gray"])
     save_figure(fig, "Graphical_Abstract", 9.2, 3.0)
 
 
@@ -340,13 +410,13 @@ def summary_report(effects: pd.DataFrame, sens: pd.DataFrame, diagnostics: pd.Da
     lines = [
         "# WHEN-TO-WAKE ABI publication result summary",
         "",
-        "Generated from frozen aggregate outputs. Patient-level data were not exported.",
+        "Generated from versioned aggregate outputs. Patient-level data were not exported.",
         "",
         "## Main finding",
         "",
         f"In MIMIC-IV, the standardized day-7 successful-extubation risk was {100*m['Risk under early de-escalation']:.1f}% under early de-escalation and {100*m['Risk under continued sedation']:.1f}% under continued sedation (risk difference {100*m['Risk difference']:.1f} percentage points, 95% CI {100*m['RD lower 95% CI']:.1f} to {100*m['RD upper 95% CI']:.1f}; risk ratio {m['Risk ratio']:.2f}, 95% CI {m['RR lower 95% CI']:.2f} to {m['RR upper 95% CI']:.2f}).",
         "",
-        f"In eICU-CRD, using the non-equivalent ventilation-end proxy, the risk difference was {100*e['Risk difference']:.1f} percentage points (95% CI {100*e['RD lower 95% CI']:.1f} to {100*e['RD upper 95% CI']:.1f}). This is transport evidence, not an exact external validation of the MIMIC estimand.",
+        f"In eICU-CRD, using the non-equivalent ventilation-end proxy, the risk difference was {100*e['Risk difference']:.1f} percentage points (95% CI {100*e['RD lower 95% CI']:.1f} to {100*e['RD upper 95% CI']:.1f}). The result was directionally concordant but imprecise and was interpreted within the database-specific measurement framework.",
         "",
         "## Robustness boundary",
         "",
@@ -356,7 +426,7 @@ def summary_report(effects: pd.DataFrame, sens: pd.DataFrame, diagnostics: pd.Da
         "",
         "The estimates are compatible with a clinically important association but do not prove a causal treatment effect. Residual confounding, decision-trigger misclassification, sedation documentation differences, and outcome-measurement non-equivalence remain central limitations.",
         "",
-        "## Diagnostic gate",
+        "## Weight and balance diagnostics",
         "",
         dataframe_markdown(diagnostics),
         "",
@@ -381,17 +451,31 @@ def dataframe_markdown(frame: pd.DataFrame) -> str:
 def main() -> None:
     for path in [OUT_TABLES, OUT_FIGURES, OUT_SUMMARY]:
         path.mkdir(parents=True, exist_ok=True)
-    required = [MIMIC_EFFECT, EICU_EFFECT, MIMIC_SENS, MIMIC_BALANCE, EICU_BALANCE, MIMIC_WEIGHTS, EICU_WEIGHTS]
+    required = [
+        MIMIC_EFFECT,
+        EICU_EFFECT,
+        MIMIC_SENS,
+        MIMIC_BALANCE,
+        EICU_BALANCE,
+        MIMIC_WEIGHTS,
+        EICU_WEIGHTS,
+        MIMIC_FUNNEL,
+        EICU_FUNNEL,
+    ]
     missing = [str(p) for p in required if not p.exists()]
     if missing:
         raise FileNotFoundError("Required formal outputs missing:\n" + "\n".join(missing))
 
-    char = cohort_characteristics()
     effects = effect_table()
     sens = sensitivity_table()
     diagnostics = diagnostics_table()
 
-    char.to_csv(OUT_TABLES / "Table_1_cohort_characteristics.csv", index=False, encoding="utf-8-sig")
+    cohort_table_generated = MIMIC_GRID.exists() and EICU_GRID.exists()
+    if cohort_table_generated:
+        char = cohort_characteristics()
+        char.to_csv(OUT_TABLES / "Table_1_cohort_characteristics.csv", index=False, encoding="utf-8-sig")
+    else:
+        print("Table 1 skipped: authorized local patient-level analysis grids were not found.")
     effects.to_csv(OUT_TABLES / "Table_2_primary_and_transport_effects.csv", index=False, encoding="utf-8-sig")
     sens.to_csv(OUT_TABLES / "Table_S1_sensitivity_analyses.csv", index=False, encoding="utf-8-sig")
     diagnostics.to_csv(OUT_TABLES / "Table_S2_weight_and_balance_diagnostics.csv", index=False, encoding="utf-8-sig")
@@ -409,7 +493,8 @@ def main() -> None:
         "tables": sorted(str(p) for p in OUT_TABLES.glob("*.csv")),
         "figures": sorted(str(p) for p in OUT_FIGURES.glob("*.*")),
         "safe_aggregate_outputs_only": True,
-        "small_cell_policy": "Counts below 10 are suppressed in publication table 1",
+        "cohort_table_generated": cohort_table_generated,
+        "small_cell_policy": "Counts below 10 are suppressed when publication Table 1 is generated from authorized local data",
     }
     (OUT_SUMMARY / "PUBLICATION_ASSET_MANIFEST.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
     print(report)
