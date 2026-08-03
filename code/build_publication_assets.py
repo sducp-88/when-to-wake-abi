@@ -11,6 +11,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from matplotlib.patches import FancyBboxPatch
 from PIL import Image
 
 
@@ -245,12 +246,30 @@ def flow_figure() -> None:
             ("Continued sedation\ncompatible at 6 h", e_map["continued_at_6h_grids"]),
         ], COLORS["teal"]),
     ]
-    ys = [0.82, 0.66, 0.50, 0.32, 0.14]
+    # Fixed geometry prevents text wrapping from changing box height or the
+    # apparent length of connectors. Every box and every arrow is identical
+    # within and across the two cohort columns.
+    ys = np.linspace(0.82, 0.14, 5)
+    box_width = 0.37
+    box_height = 0.112
+    arrow_clearance = 0.008
     for x, title, items, color in columns:
         ax.text(x, 0.94, title, ha="center", fontsize=12.5, fontweight="bold", color=COLORS["ink"])
         ax.plot([x - 0.12, x + 0.12], [0.91, 0.91], color=color, lw=2.2, solid_capstyle="round")
         for idx, ((label, n), y) in enumerate(zip(items, ys)):
             fill = COLORS["blue_light"] if color == COLORS["blue"] else COLORS["teal_light"]
+            ax.add_patch(
+                FancyBboxPatch(
+                    (x - box_width / 2, y - box_height / 2),
+                    box_width,
+                    box_height,
+                    boxstyle="round,pad=0.008,rounding_size=0.012",
+                    facecolor=fill,
+                    edgecolor=color,
+                    linewidth=1.15,
+                    transform=ax.transAxes,
+                )
+            )
             ax.text(
                 x,
                 y,
@@ -260,14 +279,25 @@ def flow_figure() -> None:
                 fontsize=8.5,
                 color=COLORS["ink"],
                 linespacing=1.12,
-                bbox=dict(boxstyle="round,pad=0.42,rounding_size=0.06", fc=fill, ec=color, lw=1.15),
+                transform=ax.transAxes,
             )
             if idx < len(items)-1:
+                arrow_start = y - box_height / 2 - arrow_clearance
+                arrow_end = ys[idx + 1] + box_height / 2 + arrow_clearance
                 ax.annotate(
                     "",
-                    xy=(x, ys[idx+1] + 0.065),
-                    xytext=(x, y - 0.065),
-                    arrowprops=dict(arrowstyle="-|>", mutation_scale=9, lw=1.0, color=COLORS["gray"]),
+                    xy=(x, arrow_end),
+                    xytext=(x, arrow_start),
+                    xycoords=ax.transAxes,
+                    textcoords=ax.transAxes,
+                    arrowprops=dict(
+                        arrowstyle="-|>",
+                        mutation_scale=9,
+                        lw=1.0,
+                        color=COLORS["gray"],
+                        shrinkA=0,
+                        shrinkB=0,
+                    ),
                 )
     save_figure(fig, "Figure_1_cohort_flow", 7.4, 6.5)
 
