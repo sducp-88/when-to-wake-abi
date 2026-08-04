@@ -2,7 +2,7 @@
 
 Released: 2026-08-04
 
-Archived version DOI: assigned after release; the concept DOI is https://doi.org/10.5281/zenodo.21761953
+Archived version DOI: https://doi.org/10.5281/zenodo.21782611
 
 ## Scope
 
