@@ -4,15 +4,15 @@
   "upload_type": "software",
   "access_right": "open",
   "license": "MIT",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "language": "eng",
   "creators": [
     {
-      "name": "Bi, Zhichao",
+      "name": "Wei, Lifei",
       "affiliation": "Department of Neurology, The Second Qilu Hospital of Shandong University, Cheeloo College of Medicine, Shandong University, Jinan, Shandong, China"
     },
     {
-      "name": "Wei, Lifei",
+      "name": "Bi, Zhichao",
       "affiliation": "Department of Neurology, The Second Qilu Hospital of Shandong University, Cheeloo College of Medicine, Shandong University, Jinan, Shandong, China"
     },
     {
