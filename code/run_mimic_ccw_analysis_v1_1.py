@@ -459,7 +459,8 @@ def cluster_bootstrap(intervals: pd.DataFrame, replicates: int, jobs: int, seed:
         sample["analysis_stay_id"] = copy_ids
         return bootstrap_once(sample, int(rng.integers(1, 2**31 - 1)))
 
-    results = Parallel(n_jobs=jobs, backend="loky", verbose=10)(
+    backend = os.environ.get("WTW_JOBLIB_BACKEND", "loky")
+    results = Parallel(n_jobs=jobs, backend=backend, verbose=10)(
         delayed(sample_and_fit)(rep) for rep in range(replicates)
     )
     return pd.DataFrame(results)

@@ -1,0 +1,10 @@
+{
+  "study_id": "WHEN-TO-WAKE-ABI",
+  "run_at_utc": "2026-08-04T07:24:44.376150+00:00",
+  "status": "PASS",
+  "primary_mimic_result_changed": false,
+  "eicu_transport_direction_changed": false,
+  "eicu_transport_precision_interpretation": "directionally concordant but imprecise in both versions",
+  "eligible_grid_change": -613,
+  "safe_aggregate_output": "aggregate_results/severity/eicu_gcs_revision_comparison_v1_4.csv"
+}

@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2026-08-04 - Severity measurement correction (SAP amendment v1.4)
+
+- Restricted eICU neurologic eligibility to the exact GCS Total field and valid values from 3 to 15.
+- Superseded the earlier eICU transport estimate and rebuilt the formal transport analysis as version 1.2.
+- Added outcome-blind weighted balance diagnostics for MIMIC GCS components, eICU valid GCS Total, and eICU APACHE IVa score and acute physiology score.
+- Added a time-valid APACHE IVa sensitivity feasibility audit. The model failed the maximum-weighted-SMD and early-strategy ESS-ratio gates; no effect estimate or confidence interval from that model is released or interpreted.
+- The primary MIMIC-IV estimand, cohort, result, sensitivity analyses, and inference are unchanged.
+
 ## 2026-08-01 — First BigQuery smoke test denied
 
 - 对 `physionet-data.mimiciv_v3_1_icu.icustays` 的首次汇总查询返回 `bigquery.tables.getData` Access Denied。

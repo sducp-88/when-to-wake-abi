@@ -1,0 +1,18 @@
+{
+  "study_id": "WHEN-TO-WAKE-ABI",
+  "database": "eICU-CRD-2.0",
+  "analysis_role": "measurement-aware transport",
+  "analysis_version": "1.1",
+  "run_at_utc": "2026-08-04T06:54:35.971482+00:00",
+  "grid_rows": 2351,
+  "interval_rows": 9404,
+  "unique_stays": 536,
+  "integrity_failures": 0,
+  "status": "PASS",
+  "grid_sha256": "8A102B3C85762E09B89F0EF06EC15B19BCB2F6D731AF3091E808DF549C150409",
+  "interval_sha256": "BCC7C282D1F6D8A62B9C867C01A0F065A82161B141F72FA6CE74905FB8DFF49D",
+  "patient_level_rows_exported": false,
+  "explicit_extubation_claim_permitted": false,
+  "gcs_rule": "GCS Total restricted to 3-15",
+  "apache_iva_score_coverage_percent": 95.4913
+}

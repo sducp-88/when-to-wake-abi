@@ -17,18 +17,19 @@ from PIL import Image
 
 ROOT = Path(os.environ.get("WTW_PROJECT_ROOT", Path.cwd())).resolve()
 MIMIC_GRID = ROOT / "00_restricted_data" / "derived" / "mimic_v1_1" / "mimic_analysis_grid_v1_1.csv.gz"
-EICU_GRID = ROOT / "00_restricted_data" / "derived" / "eicu_transport_v1_0" / "eicu_analysis_grid_transport_v1_0.csv.gz"
+EICU_GRID = ROOT / "00_restricted_data" / "derived" / "eicu_transport_v1_1" / "eicu_analysis_grid_transport_v1_1.csv.gz"
 MIMIC_RESULTS = ROOT / "aggregate_results" / "mimic"
 EICU_RESULTS = ROOT / "aggregate_results" / "eicu"
 MIMIC_EFFECT = MIMIC_RESULTS / "mimic_primary_v1_3_effect.csv"
-EICU_EFFECT = EICU_RESULTS / "eicu_transport_v1_1_calibrated_effect.csv"
+EICU_EFFECT = EICU_RESULTS / "eicu_transport_v1_2_gcs_validated_effect.csv"
 MIMIC_SENS = MIMIC_RESULTS / "sensitivity" / "mimic_sensitivity_summary_v1_3.csv"
 MIMIC_BALANCE = MIMIC_RESULTS / "mimic_primary_v1_3_balance_diagnostics.csv"
-EICU_BALANCE = EICU_RESULTS / "eicu_transport_v1_1_calibrated_balance_diagnostics.csv"
+EICU_BALANCE = EICU_RESULTS / "eicu_transport_v1_2_gcs_validated_balance_diagnostics.csv"
 MIMIC_WEIGHTS = MIMIC_RESULTS / "mimic_primary_v1_3_weight_diagnostics.csv"
-EICU_WEIGHTS = EICU_RESULTS / "eicu_transport_v1_1_calibrated_weight_diagnostics.csv"
+EICU_WEIGHTS = EICU_RESULTS / "eicu_transport_v1_2_gcs_validated_weight_diagnostics.csv"
 MIMIC_FUNNEL = MIMIC_RESULTS / "mimic_formal_funnel_2026-08-02.csv"
-EICU_FUNNEL = EICU_RESULTS / "eicu_transport_funnel_2026-08-02.csv"
+EICU_FUNNEL = EICU_RESULTS / "eicu_transport_funnel_2026-08-04.csv"
+SEVERITY_BALANCE = ROOT / "aggregate_results" / "severity" / "severity_balance_diagnostics_v1_4.csv"
 
 GENERATED = ROOT / "generated_publication_assets"
 OUT_TABLES = Path(os.environ.get("WTW_TABLE_OUTPUT", str(GENERATED / "tables")))
@@ -202,6 +203,26 @@ def diagnostics_table() -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
+def severity_balance_table() -> pd.DataFrame:
+    raw = pd.read_csv(SEVERITY_BALANCE)
+    rows = []
+    for _, row in raw.iterrows():
+        digits = 2 if row["unit"] in {"fraction", "ratio", "mg/dL", "mmol/L"} else 1
+        suffix = "%" if row["unit"] == "proportion" else ""
+        rows.append({
+            "Database": row["database"],
+            "Severity measure": row["label"],
+            "Unit": row["unit"],
+            "Continued strategy": f"{row['continue_weighted_value']:.{digits}f}{suffix}",
+            "Early de-escalation": f"{row['early_weighted_value']:.{digits}f}{suffix}",
+            "Observed coverage, continued / early": (
+                f"{row['continue_observed_percent']:.1f}% / {row['early_observed_percent']:.1f}%"
+            ),
+            "Weighted SMD": f"{row['weighted_smd']:.3f}",
+        })
+    return pd.DataFrame(rows)
+
+
 def save_figure(fig: plt.Figure, stem: str, width_in: float, height_in: float) -> None:
     fig.set_size_inches(width_in, height_in)
     fig.savefig(OUT_FIGURES / f"{stem}.png", dpi=300, bbox_inches="tight", facecolor="white")
@@ -366,6 +387,42 @@ def forest_figure(effects: pd.DataFrame, sens: pd.DataFrame) -> None:
 
 
 def balance_figure() -> None:
+    display_names = {
+        "peep": "PEEP",
+        "grid_hour": "Decision hour",
+        "gcs_motor": "GCS motor",
+        "temperature_c": "Temperature",
+        "vasopressor_observed": "Vasopressor observed",
+        "propofol_active": "Propofol active",
+        "midazolam_active": "Midazolam active",
+        "paO2_fio2": "PaO2/FiO2",
+        "pao2_fio2": "PaO2/FiO2",
+        "creatinine": "Creatinine",
+        "opioid_observed": "Opioid observed",
+        "rass": "RASS",
+        "abi_subtype": "ABI subtype",
+        "comorbidity_count": "Comorbidity count",
+        "dexmed_active": "Dexmedetomidine active",
+        "paco2": "PaCO2",
+        "apache_iva_score": "APACHE IVa score",
+        "apache_iva_aps": "APACHE IVa acute physiology score",
+        "gender": "Sex",
+        "heart_rate": "Heart rate",
+        "age": "Age",
+    }
+
+    def publication_label(row: pd.Series, variable_col: str) -> str:
+        raw = str(row[variable_col])
+        label = display_names.get(raw, raw.replace("_", " ").title())
+        level = str(row.get("level", ""))
+        if level == "continuous":
+            return label
+        if raw == "gender":
+            return f"{label}: {level}"
+        if level in {"0", "1"}:
+            return f"{label}: {'yes' if level == '1' else 'no'}"
+        return f"{label}: {level}"
+
     fig, axes = plt.subplots(1, 2, sharex=True)
     for ax, database, path, color in [
         (axes[0], "MIMIC-IV", MIMIC_BALANCE, COLORS["blue"]),
@@ -376,7 +433,7 @@ def balance_figure() -> None:
         before_col = "smd_unweighted" if "smd_unweighted" in frame.columns else "unweighted_smd" if "unweighted_smd" in frame.columns else [c for c in frame.columns if "unweighted" in c.lower() and "smd" in c.lower()][0]
         after_col = "smd_weighted" if "smd_weighted" in frame.columns else "weighted_smd" if "weighted_smd" in frame.columns else [c for c in frame.columns if "weighted" in c.lower() and "unweighted" not in c.lower() and "smd" in c.lower()][0]
         frame = frame.assign(before=pd.to_numeric(frame[before_col], errors="coerce").abs(), after=pd.to_numeric(frame[after_col], errors="coerce").abs()).sort_values("after", ascending=False).head(18).sort_values("after")
-        frame["display_label"] = frame.apply(lambda r: str(r[variable_col]).replace("_", " ") if str(r.get("level", "")) == "continuous" else f"{str(r[variable_col]).replace('_', ' ')}: {r.get('level', '')}", axis=1)
+        frame["display_label"] = frame.apply(lambda r: publication_label(r, variable_col), axis=1)
         yy = np.arange(len(frame))
         ax.hlines(yy, xmin=np.minimum(frame["before"], frame["after"]), xmax=np.maximum(frame["before"], frame["after"]), color=COLORS["grid"], lw=0.75, zorder=1)
         ax.scatter(frame["before"], yy, s=25, facecolors="white", edgecolors=COLORS["gray"], linewidths=1.0, label="Before weighting", zorder=2)
@@ -491,6 +548,7 @@ def main() -> None:
         EICU_WEIGHTS,
         MIMIC_FUNNEL,
         EICU_FUNNEL,
+        SEVERITY_BALANCE,
     ]
     missing = [str(p) for p in required if not p.exists()]
     if missing:
@@ -499,6 +557,7 @@ def main() -> None:
     effects = effect_table()
     sens = sensitivity_table()
     diagnostics = diagnostics_table()
+    severity = severity_balance_table()
 
     cohort_table_generated = MIMIC_GRID.exists() and EICU_GRID.exists()
     if cohort_table_generated:
@@ -509,6 +568,7 @@ def main() -> None:
     effects.to_csv(OUT_TABLES / "Table_2_primary_and_transport_effects.csv", index=False, encoding="utf-8-sig")
     sens.to_csv(OUT_TABLES / "Table_S1_sensitivity_analyses.csv", index=False, encoding="utf-8-sig")
     diagnostics.to_csv(OUT_TABLES / "Table_S2_weight_and_balance_diagnostics.csv", index=False, encoding="utf-8-sig")
+    severity.to_csv(OUT_TABLES / "Table_S4_severity_balance_diagnostics.csv", index=False, encoding="utf-8-sig")
 
     flow_figure()
     forest_figure(effects, sens)
@@ -516,7 +576,7 @@ def main() -> None:
     graphical_abstract(effects)
 
     report = summary_report(effects, sens, diagnostics)
-    (OUT_SUMMARY / "RESULTS_SUMMARY_PUBLICATION_v1.0.md").write_text(report, encoding="utf-8")
+    (OUT_SUMMARY / "RESULTS_SUMMARY_PUBLICATION_v1.4.md").write_text(report, encoding="utf-8")
     manifest = {
         "study_id": "WHEN-TO-WAKE-ABI",
         "input_effect_files": [str(MIMIC_EFFECT), str(EICU_EFFECT)],

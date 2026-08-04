@@ -1,0 +1,26 @@
+{
+  "study_id": "WHEN-TO-WAKE-ABI",
+  "analysis_role": "post hoc APACHE IVa time-valid sensitivity feasibility audit",
+  "status": "FAIL_NONINFERENTIAL",
+  "decision_time_rule": "grid_offset >= 1440 minutes after ICU admission",
+  "apache_rule": "complete-case APACHE IVa score included in the adherence denominator model",
+  "retained_clones": {
+    "continue_24h": 269,
+    "early_deescalation": 181
+  },
+  "unique_stays": {
+    "continue_24h": 134,
+    "early_deescalation": 128
+  },
+  "diagnostic_gates": {
+    "maximum_absolute_weighted_smd_observed": 0.1198,
+    "maximum_absolute_weighted_smd_required": 0.1,
+    "continue_ess_ratio": 0.5746,
+    "early_ess_ratio": 0.4876,
+    "minimum_ess_ratio_required": 0.5,
+    "maximum_calibrated_weight": 10.9866,
+    "maximum_weight_allowed": 20
+  },
+  "effect_estimate_released": false,
+  "interpretation": "The late-decision APACHE-adjusted subset failed the prespecified balance and effective-sample-size gates. No effect estimate or confidence interval from this exploratory model is used in the manuscript. APACHE IVa is retained as an outcome-blind post-weight severity-balance diagnostic in the full corrected eICU transport analysis."
+}

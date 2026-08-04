@@ -1,0 +1,23 @@
+{
+  "study_id": "WHEN-TO-WAKE-ABI",
+  "analysis_role": "post hoc outcome-blind severity balance diagnostic",
+  "run_at_utc": "2026-08-04T07:20:46.036475+00:00",
+  "status": "PASS",
+  "maximum_absolute_weighted_smd": 0.09921173764317397,
+  "patient_level_output": false,
+  "source_restricted_files": {
+    "MIMIC-IV v3.1": {
+      "path": "authorized local restricted directory; file not included",
+      "sha256": "F3F95DD1F3A82F746835EFAF39207249B2BDD2A54ABE9F2813D3B4514C368806",
+      "retained_clones": 5657,
+      "unique_stays": 1827
+    },
+    "eICU-CRD v2.0": {
+      "path": "authorized local restricted directory; file not included",
+      "sha256": "F8808AD9653C1BAC3BCFC2CD1ECF0D91E4B1FB8A53641EA35586D6FD03EFB78A",
+      "retained_clones": 775,
+      "unique_stays": 301
+    }
+  },
+  "safe_aggregate_output": "aggregate_results/severity/severity_balance_diagnostics_v1_4.csv"
+}

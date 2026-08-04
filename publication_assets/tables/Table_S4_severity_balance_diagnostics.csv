@@ -1,0 +1,27 @@
+﻿Database,Severity measure,Unit,Continued strategy,Early de-escalation,"Observed coverage, continued / early",Weighted SMD
+MIMIC-IV v3.1,GCS motor,score,4.6,4.7,98.6% / 98.5%,0.055
+MIMIC-IV v3.1,GCS eye,score,2.2,2.2,98.7% / 98.7%,0.030
+MIMIC-IV v3.1,GCS verbal,score,1.0,1.0,98.6% / 98.5%,0.034
+MIMIC-IV v3.1,RASS,score,-2.5,-2.5,77.6% / 77.0%,0.029
+MIMIC-IV v3.1,Intracranial pressure,mm Hg,9.1,9.0,18.7% / 18.1%,-0.022
+MIMIC-IV v3.1,Minimum MAP in prior 2 h,mm Hg,79.1,79.3,100.0% / 100.0%,0.020
+MIMIC-IV v3.1,Latest FiO2,fraction,0.42,0.42,100.0% / 100.0%,-0.001
+MIMIC-IV v3.1,Latest PEEP,cm H2O,5.9,5.7,100.0% / 100.0%,-0.099
+MIMIC-IV v3.1,PaO2/FiO2,ratio,315.93,321.01,80.3% / 79.1%,0.036
+MIMIC-IV v3.1,Lactate,mmol/L,1.48,1.47,55.1% / 53.3%,-0.013
+MIMIC-IV v3.1,Creatinine,mg/dL,1.14,1.11,97.2% / 97.1%,-0.034
+MIMIC-IV v3.1,Vasopressor observed,proportion,24.6%,22.8%,100.0% / 100.0%,-0.042
+MIMIC-IV v3.1,Opioid observed,proportion,54.3%,52.8%,100.0% / 100.0%,-0.030
+eICU-CRD v2.0,APACHE IVa score,score,64.6,63.6,93.5% / 96.1%,-0.045
+eICU-CRD v2.0,APACHE IVa acute physiology score,score,54.9,54.0,93.5% / 96.1%,-0.042
+eICU-CRD v2.0,GCS Total (valid 3-15),score,8.5,8.5,100.0% / 100.0%,0.022
+eICU-CRD v2.0,RASS,score,-2.0,-2.0,5.8% / 6.7%,-0.002
+eICU-CRD v2.0,Intracranial pressure,mm Hg,7.1,7.1,14.2% / 14.2%,0.017
+eICU-CRD v2.0,Minimum MAP in prior 2 h,mm Hg,77.0,76.9,100.0% / 100.0%,-0.003
+eICU-CRD v2.0,Latest FiO2,fraction,0.40,0.40,100.0% / 100.0%,0.003
+eICU-CRD v2.0,Latest PEEP,cm H2O,5.6,5.6,100.0% / 100.0%,-0.021
+eICU-CRD v2.0,PaO2/FiO2,ratio,347.74,347.75,70.4% / 66.0%,0.000
+eICU-CRD v2.0,Lactate,mmol/L,1.55,1.55,28.1% / 30.0%,0.003
+eICU-CRD v2.0,Creatinine,mg/dL,2.21,1.43,93.6% / 93.5%,-0.052
+eICU-CRD v2.0,Vasopressor observed,proportion,10.6%,10.4%,100.0% / 100.0%,-0.006
+eICU-CRD v2.0,Opioid observed,proportion,28.6%,24.2%,100.0% / 100.0%,-0.099

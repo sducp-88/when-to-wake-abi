@@ -1,0 +1,23 @@
+﻿Characteristic,MIMIC-IV v3.1,eICU-CRD v2.0,Notes
+"Unique ICU stays, n",2027,536,First eligible decision point per stay
+"Eligible decision points, n",9830,2351,Repeated 6-hour nested trials
+"Age, years",62.0 (49.0-75.0),60.0 (45.0-73.0),
+Male sex,1230 (60.7%),338 (63.1%),
+Acute ischemic stroke,639 (31.5%),209 (39.0%),
+Intracerebral hemorrhage,426 (21.0%),29 (5.4%),
+Subarachnoid hemorrhage,233 (11.5%),47 (8.8%),
+Traumatic brain injury,729 (36.0%),251 (46.8%),
+"Time zero after ventilation start, h",12 (12-18),18 (12-24),
+"Active core sedative classes, n",1 (1-1),1 (1-1),
+Propofol active,1785 (88.1%),457 (85.3%),
+Midazolam active,162 (8.0%),70 (13.1%),
+Dexmedetomidine active,139 (6.9%),37 (6.9%),
+"Median MAP in prior 2 h, mm Hg",80.0 (73.5-88.5),82.0 (74.0-90.1),
+Latest FiO2,0.40 (0.40-0.50),0.40 (0.40-0.50),
+"Latest PEEP, cm H2O",5.0 (5.0-5.0),5.0 (5.0-5.0),
+RASS,-3 (-4--1),-2 (-3--2),eICU RASS availability was sparse
+GCS motor (MIMIC) / total (eICU),5 (4-6),8 (7-10),Database-native neurologic measurement
+ICP measured,376 (18.5%),74 (13.8%),
+Vasopressor observed,601 (29.6%),83 (15.5%),Absence of eICU point records was not treated as proof of no use
+Opioid observed,1068 (52.7%),146 (27.2%),
+Unweighted day-7 liberation outcome,931 (45.9%),299 (55.8%),Explicit successful extubation in MIMIC; ventilation-end proxy in eICU

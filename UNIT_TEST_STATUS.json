@@ -1,7 +1,7 @@
 {
-  "tested_at_utc": "2026-08-02T16:18:13Z",
-  "python": "3.11",
-  "command": "python code/test_terminal_aware_ccw.py",
+  "tested_at_utc": "2026-08-04T08:22:00Z",
+  "python": "3.12",
+  "command": "PYTHONDONTWRITEBYTECODE=1 WTW_VENDOR_DIR=<authorized local vendor path> python code/test_terminal_aware_ccw.py",
   "terminal_aware_ccw": "PASS",
   "scope": "Synthetic terminal-event and clone-censor-weight unit tests; no patient-level data used."
 }

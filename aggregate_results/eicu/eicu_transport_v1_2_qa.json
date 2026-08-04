@@ -1,0 +1,25 @@
+{
+  "study_id": "WHEN-TO-WAKE-ABI",
+  "analysis": "eICU transport v1.2 GCS validated",
+  "run_at_utc": "2026-08-04T07:25:31.131774+00:00",
+  "status": "PASS",
+  "checks": {
+    "four_estimands_present": true,
+    "bootstrap_1000_converged": true,
+    "weight_p99_below_10": true,
+    "maximum_weight_below_20": true,
+    "ess_ratio_at_least_0_50": true,
+    "maximum_absolute_weighted_smd_below_0_10": true,
+    "gcs_total_valid_or_missing": true,
+    "severity_diagnostic_below_0_10": true,
+    "apache_time_valid_failure_not_reported_as_effect": true
+  },
+  "key_diagnostics": {
+    "eligible_stable_grids": 2351,
+    "maximum_absolute_weighted_smd": 0.0992117376431738,
+    "minimum_ess_ratio": 0.761141173741914,
+    "maximum_weight": 4.748030799485608,
+    "severity_diagnostic_maximum_absolute_smd": 0.0992117376431739
+  },
+  "patient_level_output": false
+}

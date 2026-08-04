@@ -8,14 +8,16 @@ Reproducible code, prespecified protocol, statistical analysis plan, aggregate o
 
 ## Status
 
-The analyses and aggregate outputs are unchanged. Version 1.0.4 is a metadata-only correction that lists Lifei Wei first and Zhichao Bi second among the two co-first authors; it does not change either author's contribution statement or any cohort, estimate, diagnostic, code, protocol, figure, or statistical-analysis-plan content. Version 1.0.4 is archived at [doi:10.5281/zenodo.21782611](https://doi.org/10.5281/zenodo.21782611), and the Zenodo concept record for all software versions is [doi:10.5281/zenodo.21761953](https://doi.org/10.5281/zenodo.21761953). Version 1.0.3 is archived at [doi:10.5281/zenodo.21768657](https://doi.org/10.5281/zenodo.21768657), version 1.0.2 at [doi:10.5281/zenodo.21766624](https://doi.org/10.5281/zenodo.21766624), version 1.0.1 at [doi:10.5281/zenodo.21762440](https://doi.org/10.5281/zenodo.21762440), and version 1.0.0 at [doi:10.5281/zenodo.21761954](https://doi.org/10.5281/zenodo.21761954). The accompanying manuscript has not yet been accepted or published; the manuscript DOI will be added when available.
+Version 1.0.5 is the severity-strengthened candidate release. It corrects eICU neurologic eligibility to the exact GCS Total field with valid values from 3 to 15, updates the eICU transport analysis, adds APACHE IVa and GCS balance diagnostics, and records a failed-gate time-valid APACHE feasibility analysis without releasing its effect estimate. The primary MIMIC-IV analysis is unchanged. The immutable version 1.0.5 DOI will be added after archive deposition. Version 1.0.4 remains archived at [doi:10.5281/zenodo.21782611](https://doi.org/10.5281/zenodo.21782611), and the Zenodo concept record for all software versions is [doi:10.5281/zenodo.21761953](https://doi.org/10.5281/zenodo.21761953). The accompanying manuscript has not yet been accepted or published; the manuscript DOI will be added when available.
 
 ## Main analysis
 
 - Primary MIMIC-IV analysis: 9,830 eligible decision grids from 2,027 ICU stays.
 - Estimated day-7 successful-extubation risk: 50.2% under early de-escalation versus 42.5% under continued sedation.
 - Risk difference: 7.7 percentage points (95% CI, 4.4 to 11.0); risk ratio: 1.18 (95% CI, 1.10 to 1.27).
-- eICU transport analysis: 2,964 eligible grids from 657 stays; risk difference 3.2 percentage points (95% CI, -2.9 to 10.4).
+- Corrected eICU transport analysis: 2,351 eligible grids from 536 stays; risk difference 4.0 percentage points (95% CI, -2.5 to 11.1); risk ratio 1.07 (95% CI, 0.96 to 1.20).
+- Corrected eICU maximum absolute weighted SMD: 0.099; weighted APACHE IVa score SMD: -0.045; valid GCS Total SMD: 0.022.
+- The time-valid APACHE sensitivity failed the prespecified balance and effective-sample-size gates and is explicitly noninferential; its effect estimate is not released.
 
 The eICU analysis uses a non-equivalent ventilation-end proxy and is a measurement-aware transport analysis, not exact external validation. The estimates are observational associations and do not establish a causal treatment recommendation.
 
@@ -40,6 +42,7 @@ Never commit `00_restricted_data/` or patient-level derived files.
 code/                 cohort construction, QA, estimation, sensitivity, and figure scripts
 protocol/             protocol/SAP, amendments, manifests, DAG, and common data model
 aggregate_results/    aggregate estimates, diagnostics, and bootstrap distributions
+publication_assets/   publication tables and figures generated from safe aggregate outputs
 novelty_audit/        dated search logs, screening ledger, and bounded novelty report
 ```
 
@@ -63,9 +66,11 @@ python code/build_mimic_analysis_ready_v1_1.py
 python code/qa_mimic_analysis_ready_v1_1.py
 python code/run_mimic_ccw_analysis_v1_1.py --bootstrap 1000 --n-jobs 1
 python code/run_mimic_sensitivity_v1_3.py
-python code/build_eicu_analysis_ready_v1_0.py
-python code/qa_eicu_analysis_ready_v1_0.py
-python code/run_eicu_transport_ccw_v1_0.py --bootstrap 1000 --n-jobs 1 --calibrate
+python code/build_eicu_analysis_ready_v1_1.py
+python code/qa_eicu_analysis_ready_v1_1.py
+python code/run_eicu_transport_ccw_v1_1.py --bootstrap 1000 --n-jobs 1 --calibrate
+python code/qa_eicu_transport_v1_2.py
+python code/build_severity_balance_supplement_v1_4.py
 ```
 
 Run the versioned pipeline only with authorized local data. The specification history is documented in `protocol/CHANGELOG.md` and the versioned analysis manifests.
@@ -76,7 +81,7 @@ The public repository contains the dated queries, counts, screening decisions, a
 
 ## Citation
 
-Use `CITATION.cff` and cite the immutable v1.0.4 record [doi:10.5281/zenodo.21782611](https://doi.org/10.5281/zenodo.21782611). The concept DOI [doi:10.5281/zenodo.21761953](https://doi.org/10.5281/zenodo.21761953) resolves to the latest software version. The manuscript DOI will be added when available.
+Use `CITATION.cff`. Until the immutable v1.0.5 DOI is deposited and inserted, cite the Zenodo concept record [doi:10.5281/zenodo.21761953](https://doi.org/10.5281/zenodo.21761953) together with software version 1.0.5. The manuscript DOI will be added when available.
 
 ## License
 
