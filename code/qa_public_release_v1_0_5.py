@@ -114,8 +114,8 @@ def main() -> None:
     result = {
         "generated_at_utc": __import__("datetime").datetime.now(__import__("datetime").timezone.utc).isoformat(),
         "status": "PASS",
-        "release_version": "1.0.5-candidate",
-        "immutable_release_doi": None,
+        "release_version": "1.0.5",
+        "immutable_release_doi": "10.5281/zenodo.21787638",
         "manifest_file_count_excluding_manifest_and_qa": file_count,
         "manifest_total_bytes": total_bytes,
         "forbidden_content_hits": forbidden_content_hits,

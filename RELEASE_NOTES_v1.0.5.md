@@ -1,8 +1,8 @@
 # WHEN-TO-WAKE ABI v1.0.5
 
-Candidate date: 2026-08-04
+Release date: 2026-08-04
 
-Immutable version DOI: pending archive deposition
+Immutable version DOI: https://doi.org/10.5281/zenodo.21787638
 
 ## Scope
 

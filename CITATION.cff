@@ -4,6 +4,7 @@ title: "WHEN-TO-WAKE ABI: code and protocol for Early Sedation De-escalation Aft
 type: software
 version: 1.0.5
 date-released: 2026-08-04
+doi: "10.5281/zenodo.21787638"
 repository-code: "https://github.com/sducp-88/when-to-wake-abi"
 authors:
   - given-names: Lifei

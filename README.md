@@ -1,6 +1,6 @@
 # WHEN-TO-WAKE ABI
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21761953.svg)](https://doi.org/10.5281/zenodo.21761953)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21787638.svg)](https://doi.org/10.5281/zenodo.21787638)
 
 Reproducible code, prespecified protocol, statistical analysis plan, aggregate outputs, and novelty-audit trail for:
 
@@ -8,7 +8,7 @@ Reproducible code, prespecified protocol, statistical analysis plan, aggregate o
 
 ## Status
 
-Version 1.0.5 is the severity-strengthened candidate release. It corrects eICU neurologic eligibility to the exact GCS Total field with valid values from 3 to 15, updates the eICU transport analysis, adds APACHE IVa and GCS balance diagnostics, and records a failed-gate time-valid APACHE feasibility analysis without releasing its effect estimate. The primary MIMIC-IV analysis is unchanged. The immutable version 1.0.5 DOI will be added after archive deposition. Version 1.0.4 remains archived at [doi:10.5281/zenodo.21782611](https://doi.org/10.5281/zenodo.21782611), and the Zenodo concept record for all software versions is [doi:10.5281/zenodo.21761953](https://doi.org/10.5281/zenodo.21761953). The accompanying manuscript has not yet been accepted or published; the manuscript DOI will be added when available.
+Version 1.0.5 is the severity-strengthened release. It corrects eICU neurologic eligibility to the exact GCS Total field with valid values from 3 to 15, updates the eICU transport analysis, adds APACHE IVa and GCS balance diagnostics, and records a failed-gate time-valid APACHE feasibility analysis without releasing its effect estimate. The primary MIMIC-IV analysis is unchanged. The immutable version 1.0.5 archive is [doi:10.5281/zenodo.21787638](https://doi.org/10.5281/zenodo.21787638), and the Zenodo concept record for all software versions is [doi:10.5281/zenodo.21761953](https://doi.org/10.5281/zenodo.21761953). The accompanying manuscript has not yet been accepted or published; the manuscript DOI will be added when available.
 
 ## Main analysis
 
@@ -81,7 +81,7 @@ The public repository contains the dated queries, counts, screening decisions, a
 
 ## Citation
 
-Use `CITATION.cff`. Until the immutable v1.0.5 DOI is deposited and inserted, cite the Zenodo concept record [doi:10.5281/zenodo.21761953](https://doi.org/10.5281/zenodo.21761953) together with software version 1.0.5. The manuscript DOI will be added when available.
+Use `CITATION.cff` and cite the immutable version 1.0.5 archive [doi:10.5281/zenodo.21787638](https://doi.org/10.5281/zenodo.21787638). The concept DOI [doi:10.5281/zenodo.21761953](https://doi.org/10.5281/zenodo.21761953) resolves to the latest software version. The manuscript DOI will be added when available.
 
 ## License
 
