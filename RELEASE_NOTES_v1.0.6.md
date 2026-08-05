@@ -4,6 +4,8 @@ Release date: 2026-08-05
 
 Zenodo concept DOI: https://doi.org/10.5281/zenodo.21761953
 
+Immutable version DOI: https://doi.org/10.5281/zenodo.21806757
+
 ## Scope
 
 This patch release corrects a publication-asset inconsistency in v1.0.5. The graphical abstract had retained the superseded eICU v1.1 transport estimate even though the aggregate results, manuscript tables, and v1.0.5 release notes correctly reported the eICU v1.2 GCS-validated analysis.

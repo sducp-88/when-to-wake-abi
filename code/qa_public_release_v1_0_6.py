@@ -127,6 +127,7 @@ def main() -> None:
         "status": "PASS",
         "release_version": "1.0.6",
         "concept_doi": "10.5281/zenodo.21761953",
+        "immutable_version_doi": "10.5281/zenodo.21806757",
         "manifest_file_count_excluding_manifest_and_qa": file_count,
         "manifest_total_bytes": total_bytes,
         "forbidden_content_hits": forbidden_content_hits,

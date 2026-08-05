@@ -1,10 +1,11 @@
 {
-  "generated_at_utc": "2026-08-05T11:10:30.413715+00:00",
+  "generated_at_utc": "2026-08-05T11:58:40.662296+00:00",
   "status": "PASS",
   "release_version": "1.0.6",
   "concept_doi": "10.5281/zenodo.21761953",
+  "immutable_version_doi": "10.5281/zenodo.21806757",
   "manifest_file_count_excluding_manifest_and_qa": 116,
-  "manifest_total_bytes": 5024965,
+  "manifest_total_bytes": 5025182,
   "forbidden_content_hits": [],
   "restricted_filename_hits": [],
   "python_syntax_errors": [],
