@@ -1,0 +1,12 @@
+Analysis,Metric,Estimate,95% CI or diagnostic,Status
+Trajectory and baseline dose,Continued-sedation day-7 risk,42.7%,"39.7% to 46.0%",Post hoc
+Trajectory and baseline dose,Early-de-escalation day-7 risk,50.0%,"47.6% to 53.4%",Post hoc
+Trajectory and baseline dose,Risk difference,7.2 percentage points,"3.9 to 10.6",Post hoc; balance gate narrowly missed
+Trajectory and baseline dose,Risk ratio,1.17,"1.09 to 1.26",Post hoc; balance gate narrowly missed
+Trajectory and baseline dose,Maximum absolute weighted SMD,0.102,"Threshold <0.10",Failed narrowly
+Trajectory and baseline dose,ESS ratio continued / early,"0.934 / 0.838","Threshold ≥0.50",Passed
+Trajectory and baseline dose,Maximum truncated weight continued / early,"1.99 / 2.78","Threshold <20",Passed
+Stay-balanced diagnostic,Risk difference,1.4 percentage points,No inferential interval used,Diagnostic only
+Stay-balanced diagnostic,Risk ratio,1.02,No inferential interval used,Diagnostic only
+Stay-balanced diagnostic,Maximum absolute weighted SMD,0.277,"Threshold <0.10",Failed
+Stay-balanced diagnostic,ESS ratio continued / early,"0.465 / 0.527","Threshold ≥0.50",Failed for continued strategy

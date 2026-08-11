@@ -1,10 +1,10 @@
 {
-  "title": "WHEN-TO-WAKE ABI: code and protocol for Early Sedation De-escalation After Physiologic Stabilization and Day-7 Ventilator Liberation in Acute Brain Injury",
+  "title": "WHEN-TO-WAKE ABI: code and protocol for Stability-Triggered Sedation De-escalation and Day-7 Ventilator Liberation After Acute Brain Injury: A Sequential Target-Trial Emulation",
   "description": "Reproducible code, prespecified protocol and statistical analysis plan, aggregate outputs, and novelty-audit trail for a two-cohort sequential target-trial emulation of stability-triggered sedation de-escalation in mechanically ventilated adults with acute brain injury. Patient-level MIMIC-IV and eICU-CRD data are not included and must be obtained separately from PhysioNet under the applicable data-use requirements.",
   "upload_type": "software",
   "access_right": "open",
   "license": "MIT",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "language": "eng",
   "creators": [
     {

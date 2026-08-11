@@ -1,0 +1,18 @@
+{
+  "study_id": "WHEN-TO-WAKE-ABI",
+  "analysis_version": "1.5-posthoc-bias-targeted",
+  "run_label": "bias_targeted_v1_5",
+  "run_date_local": "2026-08-11",
+  "bootstrap_requested": 200,
+  "bootstrap_converged": 200,
+  "grid_rows": 9830,
+  "interval_rows": 39320,
+  "retained_clone_rows": 5657,
+  "retained_clone_stays": 1827,
+  "population_anchor": "Exact frozen v1.3 decision population; one old decision unmatched to rebuilt features and handled through missingness indicators",
+  "posthoc_status": true,
+  "bias_target": "Predecision improvement, baseline drug-specific sedative dose, and representation of stays with multiple eligible decisions",
+  "bootstrap_unit": "Whole ICU stay",
+  "bootstrap_note": "All 200 requested whole-stay bootstrap samples converged. Only aggregate outputs are included; restricted patient-level weights remain local.",
+  "diagnostic_interpretation": "Trajectory-and-dose model narrowly failed the maximum weighted SMD threshold; stay-balanced diagnostic failed balance and continued-strategy ESS criteria. Neither replaces the frozen primary analysis."
+}

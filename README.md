@@ -1,14 +1,16 @@
 # WHEN-TO-WAKE ABI
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21806757.svg)](https://doi.org/10.5281/zenodo.21806757)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21761953.svg)](https://doi.org/10.5281/zenodo.21761953)
 
 Reproducible code, prespecified protocol, statistical analysis plan, aggregate outputs, and novelty-audit trail for:
 
-> Early Sedation De-escalation After Physiologic Stabilization and Day-7 Ventilator Liberation in Acute Brain Injury: A Two-Cohort Sequential Target-Trial Emulation
+> Stability-Triggered Sedation De-escalation and Day-7 Ventilator Liberation After Acute Brain Injury: A Sequential Target-Trial Emulation
 
 ## Status
 
-Version 1.0.6 is a publication-asset consistency patch to the severity-strengthened v1.0.5 release. It corrects the graphical abstract to display the released eICU transport estimate of +4.0 percentage points (95% CI, -2.5 to 11.1); the code, cohorts, statistical analyses, and all numerical result files are unchanged. Version 1.0.5 corrected eICU neurologic eligibility to the exact GCS Total field with valid values from 3 to 15, updated the eICU transport analysis, added APACHE IVa and GCS balance diagnostics, and recorded a failed-gate time-valid APACHE feasibility analysis without releasing its effect estimate. The primary MIMIC-IV analysis is unchanged. The immutable v1.0.6 archive is [doi:10.5281/zenodo.21806757](https://doi.org/10.5281/zenodo.21806757), and the Zenodo concept record for all software versions is [doi:10.5281/zenodo.21761953](https://doi.org/10.5281/zenodo.21761953). The accompanying manuscript has not yet been accepted or published; the manuscript DOI will be added when available.
+Version 1.0.7 adds a post hoc MIMIC-IV bias-targeted analysis incorporating baseline sedative infusion rates and predecision trajectories, a whole-stay bootstrap distribution, a stay-balanced target-population diagnostic, and revised publication figures and aggregate tables. The trajectory-and-dose model remained close to the frozen primary result but narrowly missed the prespecified balance threshold (maximum weighted absolute standardized mean difference 0.102). The stay-balanced analysis failed balance and effective-sample-size gates and is diagnostic only. Neither analysis replaces the frozen primary estimate.
+
+Version 1.0.6 remains the preceding immutable archive at [doi:10.5281/zenodo.21806757](https://doi.org/10.5281/zenodo.21806757). The Zenodo concept record for all software versions is [doi:10.5281/zenodo.21761953](https://doi.org/10.5281/zenodo.21761953). The immutable v1.0.7 DOI will be recorded here after Zenodo archives the GitHub release. The accompanying manuscript has not yet been accepted or published; its DOI will be added when available.
 
 ## Main analysis
 
@@ -18,6 +20,8 @@ Version 1.0.6 is a publication-asset consistency patch to the severity-strengthe
 - Corrected eICU transport analysis: 2,351 eligible grids from 536 stays; risk difference 4.0 percentage points (95% CI, -2.5 to 11.1); risk ratio 1.07 (95% CI, 0.96 to 1.20).
 - Corrected eICU maximum absolute weighted SMD: 0.099; weighted APACHE IVa score SMD: -0.045; valid GCS Total SMD: 0.022.
 - The time-valid APACHE sensitivity failed the prespecified balance and effective-sample-size gates and is explicitly noninferential; its effect estimate is not released.
+- Post hoc MIMIC-IV trajectory-and-dose analysis: risk difference 7.2 percentage points (95% CI, 3.9 to 10.6); risk ratio 1.17 (95% CI, 1.09 to 1.26); maximum weighted absolute SMD 0.102.
+- Stay-balanced target-population analysis: risk difference 1.4 percentage points and risk ratio 1.024; this diagnostic failed balance and effective-sample-size gates, so no confidence interval or causal interpretation is reported.
 
 The eICU analysis uses a non-equivalent ventilation-end proxy and is a measurement-aware transport analysis, not exact external validation. The estimates are observational associations and do not establish a causal treatment recommendation.
 
@@ -71,6 +75,10 @@ python code/qa_eicu_analysis_ready_v1_1.py
 python code/run_eicu_transport_ccw_v1_1.py --bootstrap 1000 --n-jobs 1 --calibrate
 python code/qa_eicu_transport_v1_2.py
 python code/build_severity_balance_supplement_v1_4.py
+# Post hoc v1.5 scripts require the same authorized local MIMIC-IV derivatives:
+python code/build_mimic_analysis_ready_v1_5.py
+python code/merge_v1_5_features_onto_frozen_v1_3_population.py
+python code/run_mimic_bias_targeted_sensitivity_v1_5.py
 ```
 
 Run the versioned pipeline only with authorized local data. The specification history is documented in `protocol/CHANGELOG.md` and the versioned analysis manifests.
@@ -81,7 +89,7 @@ The public repository contains the dated queries, counts, screening decisions, a
 
 ## Citation
 
-Use `CITATION.cff` and cite the immutable version 1.0.6 archive [doi:10.5281/zenodo.21806757](https://doi.org/10.5281/zenodo.21806757). The concept DOI [doi:10.5281/zenodo.21761953](https://doi.org/10.5281/zenodo.21761953) resolves to the latest software version. The manuscript DOI will be added when available.
+Use `CITATION.cff`. Until the v1.0.7 version DOI is recorded on the main branch, the concept DOI [doi:10.5281/zenodo.21761953](https://doi.org/10.5281/zenodo.21761953) resolves to the latest archived software version. The manuscript DOI will be added when available.
 
 ## License
 

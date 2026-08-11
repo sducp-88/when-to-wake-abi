@@ -1,10 +1,9 @@
 cff-version: 1.2.0
 message: "If you use this code, please cite the accompanying manuscript and the archived software release."
-title: "WHEN-TO-WAKE ABI: code and protocol for Early Sedation De-escalation After Physiologic Stabilization and Day-7 Ventilator Liberation in Acute Brain Injury: A Two-Cohort Sequential Target-Trial Emulation"
+title: "WHEN-TO-WAKE ABI: code and protocol for Stability-Triggered Sedation De-escalation and Day-7 Ventilator Liberation After Acute Brain Injury: A Sequential Target-Trial Emulation"
 type: software
-version: 1.0.6
-date-released: 2026-08-05
-doi: "10.5281/zenodo.21806757"
+version: 1.0.7
+date-released: 2026-08-11
 repository-code: "https://github.com/sducp-88/when-to-wake-abi"
 authors:
   - given-names: Lifei

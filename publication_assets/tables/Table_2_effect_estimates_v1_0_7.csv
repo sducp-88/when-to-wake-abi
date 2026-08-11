@@ -1,0 +1,5 @@
+Analysis,Target and outcome,Continued sedation risk,Early de-escalation risk,Risk difference (95% CI),Risk ratio (95% CI),Interpretive status
+MIMIC-IV frozen primary,"Repeated stable decisions; alive and successfully extubated by day 7",42.5%,50.2%,"7.7 pp (4.4 to 11.0)","1.18 (1.10 to 1.27)",Primary inference
+MIMIC-IV trajectory and dose,"Repeated stable decisions; primary outcome",42.7%,50.0%,"7.2 pp (3.9 to 10.6)","1.17 (1.09 to 1.26)","Post hoc; balance threshold narrowly missed"
+MIMIC-IV first decision,"First eligible decision per stay; primary outcome",51.3%,55.2%,"3.9 pp (-1.1 to 10.1)","1.08 (0.98 to 1.21)",Target-population sensitivity
+eICU transport,"Repeated stable decisions; ventilation-end proxy",61.4%,65.4%,"4.0 pp (-2.5 to 11.1)","1.07 (0.96 to 1.20)","Non-equivalent, imprecise transport"
