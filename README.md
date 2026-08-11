@@ -1,6 +1,6 @@
 # WHEN-TO-WAKE ABI
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21761953.svg)](https://doi.org/10.5281/zenodo.21761953)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21883676.svg)](https://doi.org/10.5281/zenodo.21883676)
 
 Reproducible code, prespecified protocol, statistical analysis plan, aggregate outputs, and novelty-audit trail for:
 
@@ -10,7 +10,7 @@ Reproducible code, prespecified protocol, statistical analysis plan, aggregate o
 
 Version 1.0.7 adds a post hoc MIMIC-IV bias-targeted analysis incorporating baseline sedative infusion rates and predecision trajectories, a whole-stay bootstrap distribution, a stay-balanced target-population diagnostic, and revised publication figures and aggregate tables. The trajectory-and-dose model remained close to the frozen primary result but narrowly missed the prespecified balance threshold (maximum weighted absolute standardized mean difference 0.102). The stay-balanced analysis failed balance and effective-sample-size gates and is diagnostic only. Neither analysis replaces the frozen primary estimate.
 
-Version 1.0.6 remains the preceding immutable archive at [doi:10.5281/zenodo.21806757](https://doi.org/10.5281/zenodo.21806757). The Zenodo concept record for all software versions is [doi:10.5281/zenodo.21761953](https://doi.org/10.5281/zenodo.21761953). The immutable v1.0.7 DOI will be recorded here after Zenodo archives the GitHub release. The accompanying manuscript has not yet been accepted or published; its DOI will be added when available.
+Version 1.0.7 is archived at [doi:10.5281/zenodo.21883676](https://doi.org/10.5281/zenodo.21883676). Version 1.0.6 remains the preceding immutable archive at [doi:10.5281/zenodo.21806757](https://doi.org/10.5281/zenodo.21806757), and the Zenodo concept record for all software versions is [doi:10.5281/zenodo.21761953](https://doi.org/10.5281/zenodo.21761953). The accompanying manuscript has not yet been accepted or published; its DOI will be added when available.
 
 ## Main analysis
 
@@ -89,7 +89,7 @@ The public repository contains the dated queries, counts, screening decisions, a
 
 ## Citation
 
-Use `CITATION.cff`. Until the v1.0.7 version DOI is recorded on the main branch, the concept DOI [doi:10.5281/zenodo.21761953](https://doi.org/10.5281/zenodo.21761953) resolves to the latest archived software version. The manuscript DOI will be added when available.
+Use `CITATION.cff` and cite the immutable version 1.0.7 archive [doi:10.5281/zenodo.21883676](https://doi.org/10.5281/zenodo.21883676). The concept DOI [doi:10.5281/zenodo.21761953](https://doi.org/10.5281/zenodo.21761953) resolves to the latest archived software version. The manuscript DOI will be added when available.
 
 ## License
 

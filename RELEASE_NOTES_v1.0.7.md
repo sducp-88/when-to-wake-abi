@@ -4,6 +4,8 @@ Release date: 2026-08-11
 
 Zenodo concept DOI: https://doi.org/10.5281/zenodo.21761953
 
+Immutable version DOI: https://doi.org/10.5281/zenodo.21883676
+
 This release accompanies the reconstructed manuscript titled “Stability-Triggered Sedation De-escalation and Day-7 Ventilator Liberation After Acute Brain Injury: A Sequential Target-Trial Emulation”.
 
 ## Added
@@ -24,4 +26,4 @@ The local implementation initially used a `v1_4` working label. Because the publ
 
 ## Approval and data boundary
 
-All authors approved the revised manuscript, code additions, aggregate outputs, figures, CRediT statement, declarations, AI disclosure, MIT License, GitHub release, and Zenodo archival on 2026-08-11. The release contains aggregate outputs only and no MIMIC-IV or eICU-CRD patient-level records or derivatives. After Zenodo mints the immutable version DOI, it will be recorded on the main branch and synchronized with the manuscript and submission materials.
+All authors approved the revised manuscript, code additions, aggregate outputs, figures, CRediT statement, declarations, AI disclosure, MIT License, GitHub release, and Zenodo archival on 2026-08-11. The release contains aggregate outputs only and no MIMIC-IV or eICU-CRD patient-level records or derivatives. Zenodo archived this release under immutable DOI 10.5281/zenodo.21883676.

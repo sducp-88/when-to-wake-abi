@@ -4,6 +4,7 @@ title: "WHEN-TO-WAKE ABI: code and protocol for Stability-Triggered Sedation De-
 type: software
 version: 1.0.7
 date-released: 2026-08-11
+doi: "10.5281/zenodo.21883676"
 repository-code: "https://github.com/sducp-88/when-to-wake-abi"
 authors:
   - given-names: Lifei
